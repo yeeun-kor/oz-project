@@ -6,7 +6,7 @@
 <link rel="icon" href="./favicon/favicon.png" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>노스텔지아 회원가입</title>
+<title>회원가입</title>
 <script>
 function checkIdAvailability() {
     var id = document.getElementById("ID").value;
