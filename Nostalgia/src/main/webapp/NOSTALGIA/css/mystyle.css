@@ -1,0 +1,132 @@
+:root {
+	--main: #f0ebe4;
+	--green: #686b2f;
+	--dark: #231816;
+	--grey: rgb(153, 152, 152);
+}
+
+/* Webkit 기반 브라우저용 */
+::-webkit-scrollbar {
+	width: 8px; /* 스크롤바 너비 */
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1; /* 스크롤바 트랙 배경 */
+}
+
+::-webkit-scrollbar-thumb {
+	background: #146211; /* 스크롤바 핸들 색상 */
+}
+
+@font-face {
+	/* 애플산돌고딕 폰트 적용 */
+	font-family: "BanglaMN";
+	font-weight: normal;
+	src: url("../font/BanglaMN.ttf") format("truetype");
+} /* 이후 "SDGothic"으로 폰트 적용 가능 */
+@font-face {
+	font-family: "Pretendard-Regular";
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+		format("woff");
+}
+
+html, body {
+	background-color: var(--main);
+	font-family: "Pretendard-Regular";
+}
+
+h1, h2, h3 {
+	font-family: "BanglaMN";
+}
+
+.journey::after {
+	position: absolute;
+	top: 20%;
+	right: 0;
+	display: block;
+	width: 1px;
+	height: 200px;
+	background-color: black;
+	content: "";
+}
+
+.journey::before {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	display: none;
+	width: 300px;
+	height: 1px;
+	margin-left: -150px;
+	background-color: black;
+	content: "";
+}
+/* 인디케이터버튼 */
+#carouselExampleIndicators .carousel-indicators .active {
+	background-color: var(--green);
+}
+
+#carouselExampleIndicators .carousel-indicators {
+	position: relative;
+	bottom: -20px;
+}
+
+#carouselExampleFade .carousel-indicators li {
+	background-color: var(--grey);
+}
+
+/*modal discovery*/
+.custom-discovery-more {
+	background-color: var(--main);
+}
+
+.custom-btn {
+	position: absolute;
+	top: 250px;
+}
+
+#carouselExampleControlsNoTouching .carousel-inner .carousel-item p {
+	font-size: 13px;
+}
+
+/* ourhonok-hover 이미지 커졌다 작아지기  */
+.ourhonok-card {
+	position: relative; /* 내부 요소의 z-index 관리 */
+	overflow: hidden; /* 이미지가 카드 밖으로 나가지 않도록 설정 */
+	margin-bottom: 100px;
+	border: none;
+}
+
+.ourhonok-hover {
+	position: relative; /* z-index를 활성화하려면 필요 */
+	z-index: 1; /* 기본 상태 */
+	width: 100%;
+	height: auto;
+	transition: transform 0.4s ease-in-out;
+}
+
+.ourhonok-hover:hover {
+	z-index: 1; /* 이미지가 다른 요소보다 위로 오르지 않음 */
+	transform: scale(1.1);
+}
+
+.ourhonok-body {
+	position: relative; /* 텍스트 영역을 별도로 관리 */
+	z-index: 2; /* 텍스트가 이미지보다 위에 표시되도록 설정 */
+	background-color: var(--main);
+}
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 미디어쿼리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+@media ( max-width : 767.98px) {
+	.journey::after {
+		display: none;
+	}
+	.journey::before {
+		display: block;
+	}
+}
