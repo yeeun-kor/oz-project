@@ -1,3 +1,6 @@
+import GlobalSearchBar from "@/components/global-searchbar";
+import { ReactNode } from "react";
+
 export default function Home() {
   return (
     <>
@@ -5,3 +8,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = (page: ReactNode) => {
+  return <GlobalSearchBar>{page}</GlobalSearchBar>;
+};
