@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import style from "./global-searchbar.module.css";
 
 export default function GlobalSearchBar({
   children,
@@ -31,23 +32,21 @@ export default function GlobalSearchBar({
   };
   return (
     <div>
-      <div>
-        <div>
-          <input
-            type="text"
-            placeholder="검색어를 입력하세요..."
-            onChange={onChangeSearch}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                onSubmit();
-              }
-            }}
-            value={search}
-          />
-          <button onClick={onSubmit}>검색</button>
-        </div>
-        {children}
+      <div className={style.searchbar_container}>
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요..."
+          onChange={onChangeSearch}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              onSubmit();
+            }
+          }}
+          value={search}
+        />
+        <button onClick={onSubmit}>검색</button>
       </div>
+      {children}
     </div>
   );
 }
