@@ -1,12 +1,24 @@
 import { useRouter } from "next/router";
-import SearchBar from "../components/searchBar";
 import { ReactNode } from "react";
-export default function Page() {
+import movies from "@/mock/movies.json";
+import MovieItem from "../components/movie-item";
+import SearchBar from "../components/searchBar";
+
+export default function Search() {
   const router = useRouter();
-  const { q } = router.query;
-  return <h1>검색결과 : {q}</h1>;
+  const q = router.query.q as string;
+
+  return (
+    <div>
+      {movies
+        .filter((movie) => movie.title.includes(q))
+        .map((movie) => (
+          <MovieItem key={movie.id} {...movie} />
+        ))}
+    </div>
+  );
 }
 
-Page.getLayout = (page: ReactNode) => {
+Search.getLayout = (page: ReactNode) => {
   return <SearchBar>{page}</SearchBar>;
 };

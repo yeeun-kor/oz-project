@@ -5,13 +5,13 @@
 }
 
 .cover_img_container {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 20px;
-  background-position: center;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  position: relative;
 }
 
 .cover_img_container::before {
@@ -37,13 +37,10 @@
 
 .subTitle,
 .author {
-  color: grey;
+  font-size: small;
 }
 
 .description {
-  background-color: rgb(245, 245, 245);
-  padding: 15px;
   line-height: 1.3;
   white-space: pre-line;
-  border-radius: 5px;
 }
