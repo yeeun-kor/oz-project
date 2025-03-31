@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 15px;
+  padding: 20px 10px;
+  color: black;
+}
+
+.container img {
+  width: 150px;
+}

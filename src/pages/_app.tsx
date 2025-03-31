@@ -1,8 +1,16 @@
 import "@/styles/globals.css";
+<<<<<<< HEAD
 import type { AppProps } from "next/app";
 import GlobalLayout from "../components/global-layout";
 import { NextPage } from "next";
 import { ReactNode } from "react";
+=======
+import { NextPage } from "next";
+import { AppProps } from "next/app";
+import { ReactNode } from "react";
+import GlobalLayout from "./components/global-layout";
+
+>>>>>>> master
 type nextPageWithLayout = NextPage & {
   getLayout?: (page: ReactNode) => ReactNode;
 };

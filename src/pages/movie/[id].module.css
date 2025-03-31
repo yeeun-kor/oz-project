@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cover_img_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.cover_img_container::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  content: "";
+}
+
+.cover_img_container > img {
+  z-index: 1;
+  max-width: 350px;
+  height: 100%;
+}
+
+.title {
+  font-size: large;
+  font-weight: bold;
+}
+
+.subTitle,
+.author {
+  font-size: small;
+}
+
+.description {
+  line-height: 1.3;
+  white-space: pre-line;
+}
