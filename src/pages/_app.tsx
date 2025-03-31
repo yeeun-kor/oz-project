@@ -1,19 +1,14 @@
 import "@/styles/globals.css";
-<<<<<<< HEAD
-import type { AppProps } from "next/app";
-import GlobalLayout from "../components/global-layout";
-import { NextPage } from "next";
-import { ReactNode } from "react";
-=======
+
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactNode } from "react";
 import GlobalLayout from "./components/global-layout";
 
->>>>>>> master
+
 type nextPageWithLayout = NextPage & {
   getLayout?: (page: ReactNode) => ReactNode;
-};
+}
 // NextPageWithLayout 타입을 정의합니다. getLayout 속성을 추가합니다.
 // 이 타입을 사용하여 페이지 컴포넌트에서 getLayout 함수를 정의할 수 있습니다.};
 

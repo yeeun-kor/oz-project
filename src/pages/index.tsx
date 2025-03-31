@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import GlobalSearchBar from "@/components/global-searchbar";
-import { ReactNode } from "react";
 
-export default function Home() {
-  return (
-    <>
-      <h1>메인페이지</h1>
-    </>
-=======
 import { ReactNode } from "react";
 import movies from "@/mock/movies.json";
 import SearchBar from "./components/searchBar";
@@ -36,14 +27,11 @@ export default function Home() {
         </div>
       </section>
     </div>
->>>>>>> master
+
   );
 }
 
 Home.getLayout = (page: ReactNode) => {
-<<<<<<< HEAD
-  return <GlobalSearchBar>{page}</GlobalSearchBar>;
-=======
   return <SearchBar>{page}</SearchBar>;
->>>>>>> master
+
 };

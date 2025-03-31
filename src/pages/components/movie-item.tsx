@@ -1,4 +1,4 @@
-import type { MovieData } from "@/types";
+import type { MovieData } from "@/type";
 import Link from "next/link";
 
 import style from "./movie-item.module.css";
