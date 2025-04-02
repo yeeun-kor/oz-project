@@ -1,13 +1,27 @@
 import GlobalSearchBar from "@/components/global-searchbar";
-import { useRouter } from "next/router";
+import fetchMovies from "@/lib/fetch-movies";
+import MovieItem from "../components/movie-item";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { getServerSideProps } from "..";
 import { ReactNode } from "react";
 
-export default function Search() {
-  const router = useRouter();
-  const { q } = router.query;
+export const gerServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const q = context.query.q;
+  const movies = await fetchMovies(q as string);
+
+  return { props: { movies } };
+};
+
+export default function Search({
+  movies,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div>
-      <h1>검색어는 {q}</h1>
+      {movies.map((movie) => (
+        <MovieItem key={movie.id} {...movie}></MovieItem>
+      ))}
     </div>
   );
 }
