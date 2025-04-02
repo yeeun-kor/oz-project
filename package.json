@@ -1,42 +1,50 @@
 {
-<<<<<<< HEAD
+
   "name": "onebite-cinema",
-=======
-  "name": "section02",
->>>>>>> master
+
   "version": "0.1.0",
+
   "private": true,
+
   "scripts": {
+
     "dev": "next dev",
+
     "build": "next build",
+
     "start": "next start",
+
     "lint": "next lint"
+
   },
+
   "dependencies": {
-<<<<<<< HEAD
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.26"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-=======
+
     "next": "14.2.26",
+
+    "onebite-cinema": "file:",
+
     "react": "^18",
-    "react-dom": "^18",
-    "section02": "file:"
+
+    "react-dom": "^18"
+
   },
+
   "devDependencies": {
->>>>>>> master
+
     "@types/node": "^20",
+
     "@types/react": "^18",
+
     "@types/react-dom": "^18",
+
     "eslint": "^8",
-<<<<<<< HEAD
-    "eslint-config-next": "14.2.26"
-=======
+
     "eslint-config-next": "14.2.26",
+
     "typescript": "^5"
->>>>>>> master
+
   }
+
 }
+

@@ -1,4 +1,6 @@
-export default async function fetchMovies() {
+import { MovieData } from "@/type";
+
+export default async function fetchMovies():Promise<MovieData[]> {
   const url = "http://localhost:12345/movie";
 
   try {

@@ -1,7 +1,5 @@
 {
-<<<<<<< HEAD
-  "extends": ["next/core-web-vitals", "next/typescript"]
-=======
+
   "extends": [
     "next",
     "plugin:react/recommended",
@@ -13,5 +11,5 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error"
   }
->>>>>>> master
+
 }

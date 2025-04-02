@@ -4,8 +4,16 @@ import movies from "@/mock/movies.json";
 import SearchBar from "./components/searchBar";
 import MovieItem from "./components/movie-item";
 import style from "./index.module.css";
+import fetchMovies from "@/lib/fetch-movies";
+import { InferGetServerSidePropsType } from "next";
 
-export default function Home() {
+//ssr설정
+export const getServerSideProps =async()=>{
+const [allMovies] = await Promise.all([fetchMovies()])
+  return{props:{allMovies}}
+}
+
+export default function Home({allMovies}:InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className={style.container}>
       <section>
@@ -21,7 +29,7 @@ export default function Home() {
         <h3>등록된 모든 영화</h3>
         <div className={style.movie_list}>
           {" "}
-          {movies.map((movie) => (
+          {allMovies.map((movie) => (
             <MovieItem key={movie.id} {...movie} />
           ))}
         </div>
