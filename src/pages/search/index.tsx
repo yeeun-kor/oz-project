@@ -2,10 +2,9 @@ import GlobalSearchBar from "@/components/global-searchbar";
 import fetchMovies from "@/lib/fetch-movies";
 import MovieItem from "../components/movie-item";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { getServerSideProps } from "..";
 import { ReactNode } from "react";
 
-export const gerServerSideProps = async (
+export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const q = context.query.q;
