@@ -7,22 +7,33 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import fetchOneMovie from "@/lib/fetch-one-movie";
+import { useRouter } from "next/router";
 
 export const getStaticPaths = () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const movie = await fetchOneMovie(Number(id));
+  if (!movie) {
+    return {
+      notFound: true,
+    };
+  }
   return { props: { movie } };
 };
+
 export default function Page({
   movie,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>로딩중...</div>;
+  }
   if (!movie) {
     return <div>영화를 찾을 수 없습니다.</div>;
   }
