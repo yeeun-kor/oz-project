@@ -24,17 +24,25 @@ import { useRouter } from "next/router";
 export default function Search() {
   const [movies, setMovies] = useState<MovieData[]>([]);
   const router = useRouter();
-  const { q } = router.query;
+  const q = router.query.q as string;
 
-  const fetchSearchResult = async () => {
-    const data = await fetchMovies(q as string);
+  const fetchSearchResult = async (q: string) => {
+    const data = await fetchMovies(q);
     setMovies(data);
   };
   useEffect(() => {
     if (q) {
-      fetchMovies();
+      fetchSearchResult(q);
     }
   }, [q]);
+
+  return (
+    <div>
+      {movies.map((movie) => (
+        <MovieItem key={movie.id} {...movie}></MovieItem>
+      ))}
+    </div>
+  );
 }
 
 Search.getLayout = (page: ReactNode) => {
