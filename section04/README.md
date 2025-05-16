@@ -51,8 +51,48 @@
 
 - 레이아웃이 완료되면 페이지가 화면에서 랜더링 = "페인트" 된다.
 
+---
+
 ## React App실행하기
 
 - React 생성시 Vite(빝) 이라는 편리한 확장자 도구를 사용해서 실행한다.
 - 초보자들도 사용하기 편하도록, 복잡한 코드 설정이 한큐에 저장되어 있기 때문이다.
 - React 생성시 " npm create vite@latest " 로 React App생성하면 된다.
+
+---
+
+# React App 구동 원리
+
+## React App 서버에 대해
+
+- Vite로 생성한 ReactApp에서는 WebServer가 내장되어 있음.
+- `npm run dev`명령은 이러한 React App 서버를 가동시키는 명령어 였던 것.
+
+## 작동 순서
+
+1. index.html파일을 보여준다.
+
+-`<body>` 태그가 텅텅 비어있음.
+
+-내용물들은 어디서 왔을까?
+
+- `<script>` 의 `src` 폴더 아래에 있는 `main.jsx` 라는 자바스크립트 파일이 실행되었을 때, 동적으로 추가되는 요소들임.
+
+2. main.jsx 확인하기
+
+- React가 제공하는 내부 메소드로 무언가 하고 있음 .....
+
+### React 내부 메소드 createRoot
+
+- 인수로 전달받은 HTML 요소를 리액트의 root로 만들어주는 역할을 함.
+
+### 내부 메소드 render
+
+- render메서드를 호출해서, createRoot 아래에 랜더링 하겠다.
+- `<App>` 이라는걸 = 즉, App컴포넌트를 랜더링 하겠다 라는 의미
+- `APP`은 어디서 왔니?
+
+3. App.jsx 파일 확인
+
+- App함수는 `<html>`태그를 return하는데, 이것을 컴포넌트라고 부른다.
+- 즉, App컴포넌트라는 의미임.
