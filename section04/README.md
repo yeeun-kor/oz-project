@@ -96,3 +96,11 @@
 
 - App함수는 `<html>`태그를 return하는데, 이것을 컴포넌트라고 부른다.
 - 즉, App컴포넌트라는 의미임.
+
+## 💫React App 작동 순서 정리하기
+
+1. 브라우저가 index.html을 로드.
+2. `<script> ` 태그가 빌드된 JS 파일(포함: `main.jsx`)을 실행.
+3. main.jsx에서 `ReactDOM.createRoot`로 `id="root"`를 루트로 설정.
+4. App 컴포넌트를 Virtual DOM으로 변환해 렌더링.
+5. 최종 UI가 id="root"에 삽입되어 브라우저에 표시
