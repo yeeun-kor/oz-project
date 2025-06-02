@@ -6,6 +6,7 @@ class BinarySearchTree {
     this.root = rootNode;
   }
 
+  //삽입하는 과정
   insert(data) {
     if (this.root == null) {
       this.root = new BinaryTree(data);
@@ -51,7 +52,33 @@ class BinarySearchTree {
 
     return null;
   }
+  //제거하는 과정(매개변수는 제거할 데이터인 targetData설정)
+  remove(targetData) {
+    //-1 함수에 사용될 변수 먼저 선언(페이크노드:루트노드를 제거하기 위함. 다른 애들은 다 부모노드가 있는데, 루트노드는 부모 )
+    let fakeParentRootNode = new BinarySearchTree(0);
+    let parentNode = fakeParentRootNode;
+    let currentNode = this.root;
+    let deletingNode = null;
+
+    //-2 제거 해야할 데이터 찾기 (targetData찾기)
+    while (currentNode != null && currentNode.getData() != targetData) {
+      parentNode = currentNode;
+      if (currentNode.getData() > targetData) {
+        currentNode = currentNode.getLeftSubTree();
+      } else {
+        currentNode = currentNode.getRightSubTree();
+      }
+    }
+    if (currentNode == null) {
+      return;
+    }
+
+    //- 3. 제거할 노드 찾았으니, 그 제거노드를 제거하는 기능 구현
+    //- 제거 할 노드 값 새로운 변수로 저장
+    deletingNode = currentNode;
+  }
 }
+
 //순서대로 데이터 꼭 맞추어서 넣어주기, 왼쪽으로 내려가는 식으로
 //삽입하는 과정정
 let binarySearchTree = new BinarySearchTree();
