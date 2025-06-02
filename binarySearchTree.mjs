@@ -76,9 +76,40 @@ class BinarySearchTree {
     //- 3. 제거할 노드 찾았으니, 그 제거노드를 제거하는 기능 구현
     //- 제거 할 노드 값 새로운 변수로 저장
     deletingNode = currentNode;
+
+    if (
+      //* 제거할 노드가 터미널 노드라는건 확인하는 과정정
+      deletingNode.getLeftSubTree() == null &&
+      deletingNode.getRightSubTree() == null
+    ) {
+      //부모 노드 연결 끊어주기
+      if (parentNode.getLeftSubTree() == deletingNode) {
+        parentNode.removeLeftSubTree();
+      } else {
+        parentNode.removeRightSubTree();
+      }
+    } else if (
+      //* 제거할 노드가 자식노드1개만 갖고 있다면?
+      deletingNode.getLeftSubTree() == null ||
+      deletingNode.getRightSubTree() == null
+    ) {
+      let deletingNodeChild = null;
+      if (deletingNode.getLeftSubTree() != null) {
+        deletingNodeChild = deletingNode.getLeftSubTree();
+      } else {
+        deletingNodeChild = deletingNode.getRightSubTree();
+      }
+
+      //* 제거자식노드 & 제거부모노드 연결
+      if (parentNode.getLeftSubTree() == deletingNode) {
+        parentNode.setLeftSubTree(deletingNodeChild);
+      } else {
+        parentNode.setRightSubTree(deletingNodeChild);
+      }
+    }
   }
 }
-
+/******************************************* */
 //순서대로 데이터 꼭 맞추어서 넣어주기, 왼쪽으로 내려가는 식으로
 //삽입하는 과정정
 let binarySearchTree = new BinarySearchTree();
