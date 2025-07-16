@@ -1,0 +1,32 @@
+.header {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  font-weight: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100px;
+  width: 100%;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerLinks {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  outline: none;
+  & a {
+    text-decoration: none;
+    color: var(--link-font-color);
+    font-size: 1.2rem;
+  }
+  & a:hover {
+    color: var(--link-hover-font-color);
+  }
+}
