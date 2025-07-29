@@ -1,18 +1,19 @@
-🧮 Calculator
+# 🧮 Calculator
 계산기 디자인
 
-나만의 계산기 구현하기 | JS Final Mission in OZ
+## 나만의 계산기 구현하기 | JS Final Mission in OZ
 🚀 Live Demo (GitHub Pages)
-작업 기간: 2025-07-25 ~ 2025-07-30
-작업 로그: Binyard Blog
-디자인 시안: Figma
+- 작업 기간: 2025-07-25 ~ 2025-07-30
+- 작업 로그: Binyard Blog
+- 디자인 시안: Figma
 
-🗂️ JavaScript 최종과제 가이드
+
+## 🗂️ JavaScript 최종과제 가이드
 DAY1 미션지
 DAY2 미션지
 DAY3 미션지
 
-📁 Folder Structure
+## 📁 Folder Structure
 calculator/
 ├── index.html
 ├── src/
@@ -22,7 +23,7 @@ calculator/
 ├── .gitignore
 └── package.json
 
-📍 Class Naming Convention
+## 📍 Class Naming Convention
 이 프로젝트는 BEM(Block Element Modifier) 방식을 기반으로 클래스명을 작성하되, 일부 유틸리티 클래스는 예외로 처리합니다.
 
 필수 클래스
