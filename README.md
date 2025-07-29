@@ -264,7 +264,7 @@ if `($display.textContent === ".")`  되지 않는 이유
    <details>
   <summary> 미션04일차 </summary>
   <div markdown="1">
-  
+
   </div>
   </details>
   <br>
