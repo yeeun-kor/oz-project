@@ -57,3 +57,114 @@ body {
 .header > button:nth-child(3) {
   background-color: green;
 }
+/* 모든 요소의 기본 여백 제거 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "SeoulAlrimTTF-Bold";
+}
+
+@font-face {
+  font-family: "SeoulAlrimTTF-Bold";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* HTML과 Body의 기본 설정 */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #46523f;
+  background: linear-gradient(to right, #a5a048, #46523f);
+}
+
+.flex {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#container {
+  width: 480px;
+  height: 640px;
+  flex-direction: column;
+  padding: 30px;
+  gap: 10px;
+  background-color: #125429;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px;
+}
+
+/* header 3색버튼 */
+.header {
+  width: 100%;
+}
+.header > button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+}
+.header > button:nth-child(1) {
+  background-color: red;
+}
+.header > button:nth-child(2) {
+  background-color: rgb(255, 221, 0);
+}
+.header > button:nth-child(3) {
+  background-color: green;
+}
+
+/* 화면 디스플레이 영역 */
+.display {
+  width: 100%;
+  height: 25%;
+  border-radius: 10px;
+  background-color: #fbec61;
+  text-align: right;
+  padding: 30px;
+  font-size: 3rem;
+  line-height: 150px;
+  overflow: hidden;
+}
+
+/* 하단 버튼 영역 */
+.buttons {
+  border-radius: 10px;
+  width: 100%;
+  height: 75%;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* 버튼 여백 추가, 너비는 계산 */
+.button {
+  width: calc(25% - 4px);
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 70px;
+}
+
+.zero {
+  width: calc(50% - 4px);
+}
+
+/* 버튼 이벤트 */
+.button:hover {
+  background-color: rgba(0, 64, 0, 0.701);
+}
+.button:active {
+  background-color: #a5a048;
+}
