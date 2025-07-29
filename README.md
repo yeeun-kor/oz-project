@@ -27,6 +27,9 @@
 HTML 파일을 생성하고 기본 구조를 작성하세요
 CSS 초기화 코드를 입력해주세요.
 
+<br>
+<br>
+
 #### 구현 단계
 
 `index.html`
@@ -37,6 +40,9 @@ CSS 초기화 코드를 입력해주세요.
 4. 각 영역을 시각적으로 확인할 수 있도록 border 속성을 추가합니다.
 5. display와 buttons를 flex를 사용하여 적절하게 배치합니다.
 6. 계산기 컨테이너의 내부 여백을 적절하게 설정합니다.
+
+<br>
+<br>
 
 ### STEP 2. 계산기 상단에 버튼 추가하기 (도전미션)
 
@@ -62,6 +68,9 @@ CSS 초기화 코드를 입력해주세요.
 1. CSS의 flexbox 속성을 이용해 계산기 레이아웃을 구성하세요.
 2. 계산기의 기본 구성 요소를 추가하세요 (디스플레이, 숫자 버튼, 연산자 버튼 등).
 
+<br>
+<br>
+
 #### 구현 단계
 
 `index.html`
@@ -81,6 +90,9 @@ CSS 초기화 코드를 입력해주세요.
 1. 텍스트를 오른쪽으로 정렬합니다.
 2. 콘텐츠와 테두리 사이에 padding을 지정합니다.
 3. buttons 영역과 버튼들을 flexbox를 사용하여 정렬합니다.
+
+<br>
+<br>
 
 ## 🔥도전 미션
 
@@ -106,6 +118,9 @@ CSS 초기화 코드를 입력해주세요.
 
 - 각 버튼을 클릭했을 때 해당 버튼의 값을 콘솔에 출력하세요.
 
+<br>
+<br>
+
 ## 구현 단계
 
 ### 3-1단계: 각 버튼을 클릭했을 때 console에 각 버튼의 value가 나오도록 하기
@@ -116,23 +131,23 @@ CSS 초기화 코드를 입력해주세요.
   2. 각 버튼에 클릭 이벤트 리스너를 추가합니다 ⇒ for문 돌려서 개별 요소에 접근
   3. 버튼이 클릭되었을 때, 해당 버튼의 값을 콘솔에 출력합니다.
      - 해당 버튼의 값 ⇒ `textContent`로 설정함
-
-  ![](attachment:a9ba31c8-4541-4d06-9231-150d82e7443e:Jul-04-2024_16-07-45.gif)
+       <img width="1118" height="282" alt="Image" src="https://github.com/user-attachments/assets/ef2356f3-d3b2-4d53-9628-371df9260bcd" />
 
 <aside>
-💡
-
-`forEach()` 사용하는 이유
+💡 `forEach()` 사용하는 이유
 
 ```
 const $btn = document.querySelectorAll(".button");
 console.log($btn);
 ```
 
-![image.png](attachment:e81d6fb0-20c8-49ab-a2b3-0925276ab911:image.png)
+<img width="1080" height="810" alt="Image" src="https://github.com/user-attachments/assets/b0c6beca-0242-4c72-bf2b-7690bfeea64e" />
 
 - 클래스명으로 가지고 온 노드 → 19개의 노드 리스트 발견 , 하나씩 순회하면서 이벤트 리스너 추가해야함.
 </aside>
+
+<br>
+<br>
 
 ### 3-2단계: 숫자를 디스플레이에 표시하기
 
@@ -143,6 +158,9 @@ console.log($btn);
 - 초기 값이 `0`이 아닐 때는 클릭한 숫자가 뒤에 추가되어야 합니다.
 - 클래스가 `number`인 버튼에 대해서만 처리하세요.
 
+<br>
+<br>
+
 ### 구현 단계
 
 1. **script.js**
@@ -151,6 +169,9 @@ console.log($btn);
    3. 버튼이 클릭되었을 때, 클래스가 `number`인 경우 디스플레이에 값을 표시합니다.
    4. 디스플레이가 `0`일 때는 클릭한 숫자로 바뀌어야 합니다.
    5. 디스플레이가 `0`이 아닐 때는 클릭한 숫자가 뒤에 추가되어야 합니다.
+
+<br>
+<br>
 
 ### 구현
 
@@ -173,16 +194,23 @@ $num.forEach((num) => {
    1. 만약 `display===”0”` 이면 , 클릭한 요소로 “덮어쓰기 해야함 “
    2. 그게 아니라면, 클릭한 숫자들이 뒤에 계속 누적해서 쌓여야한다.
 
+<br>
+<br>
+
    <aside>
    💡
 
-   왜 `display=== 0` 이 안될까?
+왜 `display=== 0` 이 안될까?
 
-   - textContent는 항상 “문자열 “ 반환
-   - **숫자가** 아니기 때문에 조건 실패함.
-   </aside>
+- textContent는 항상 “문자열 “ 반환
+- **숫자가** 아니기 때문에 조건 실패함.
+</aside>
 
-![계산기.gif](attachment:2250f65a-1256-496e-92e0-d540bf67ece9:계산기.gif)
+<br>
+<br>
+
+<br>
+<br>
 
 ## 🔥도전 미션
 
@@ -204,6 +232,9 @@ $dec.addEventListener("click", () => {
 });
 ```
 
+<br>
+<br>
+
 <aside>
 💡
 
@@ -215,21 +246,26 @@ if `($display.textContent === ".")`  되지 않는 이유
 - 그래서 `===”.”` 사용하지 않고 [`includes`] 를 사용한 것
 </aside>
 
+<br>
+<br>
+
 ### 요구 사항 2 : 클리어 기능 추가
 
 - `C` 버튼을 클릭하면 디스플레이를 `0`으로 초기화하세요. - 초기화 클래스 추가 = “clear” - `display` 의 텍스트 부분 0으로 초기화 시키기.
 
-        ```
-        $clear.addEventListener("click", () => {
-          $display.textContent = "0";
-        });
-        ```
+          ```
+          $clear.addEventListener("click", () => {
+            $display.textContent = "0";
+          });
+          ```
 
+    <br>
+    <br>
+        </div>
+        </details>
+      <br><br>
   <br>
   <br>
-      </div>
-      </details>
-    <br><br>
 
 ## 📁 Folder Structure
 
