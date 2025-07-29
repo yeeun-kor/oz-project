@@ -258,8 +258,9 @@ if `($display.textContent === ".")`  되지 않는 이유
             $display.textContent = "0";
           });
           ```
-        </div>
-        </details>
+
+ </div>
+  </details>
 
    <details>
   <summary> 미션04일차 </summary>
