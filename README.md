@@ -1,14 +1,11 @@
 # 🧮 Calculator
 
 <img width="612" height="783" alt="Image" src="https://github.com/user-attachments/assets/79821180-8204-492e-adba-c2ce97d13f8c"/>
-계산기 디자인
 
 <br>
 <br>
 
 ## 나만의 계산기 구현하기
-
-- 📊라이브 데모
 
 ![Image](https://github.com/user-attachments/assets/c2a625ff-9852-4fac-9b45-dd8da1c2a976)
 
@@ -48,7 +45,8 @@ CSS 초기화 코드를 입력해주세요.
 1.  계산기 상단에 버튼을 3개 추가하세요
 2.  맥북 계산기의 디자인 모티브로 하지만, 기능은 동작하지 않아도 됩
 3.  버튼은 원 형태이고, 각 버튼이 일정한 간격을 갖도록 구현해야 합니다.
-
+<br>
+<br>
 </div>
 
 </details>
@@ -92,7 +90,8 @@ CSS 초기화 코드를 입력해주세요.
 
 - 버튼에 마우스를 올리면(`hover`) 배경색이 변경되도록 하세요.
 - 버튼을 클릭하면(`active`) 배경색이 잠시 변경되도록 하세요.
-
+<br>
+<br>
 </div>
 
 </details>
@@ -105,12 +104,9 @@ CSS 초기화 코드를 입력해주세요.
 
 [3단계 미션지](https://www.notion.so/3-23acaf5650aa8110a6bac1f3c2aaa951?pvs=21)
 
-
 - 각 버튼을 클릭했을 때 해당 버튼의 값을 콘솔에 출력하세요.
 
 ## 구현 단계
-
-
 
 ### 3-1단계: 각 버튼을 클릭했을 때 console에 각 버튼의 value가 나오도록 하기
 
@@ -190,8 +186,6 @@ $num.forEach((num) => {
 
 ## 🔥도전 미션
 
-
-
 ### 소수점과 Clear 기능 추가하기
 
 ### 요구 사항 1 : 소수점 추가
@@ -225,15 +219,17 @@ if `($display.textContent === ".")`  되지 않는 이유
 
 - `C` 버튼을 클릭하면 디스플레이를 `0`으로 초기화하세요. - 초기화 클래스 추가 = “clear” - `display` 의 텍스트 부분 0으로 초기화 시키기.
 
-      ```
-      $clear.addEventListener("click", () => {
-        $display.textContent = "0";
-      });
-      ```
+        ```
+        $clear.addEventListener("click", () => {
+          $display.textContent = "0";
+        });
+        ```
 
-    </div>
-    </details>
-  <br><br>
+  <br>
+  <br>
+      </div>
+      </details>
+    <br><br>
 
 ## 📁 Folder Structure
 
