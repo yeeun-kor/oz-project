@@ -170,13 +170,9 @@ body {
 
 /* 버튼 이벤트 */
 .button:hover {
-  background-color: rgba(0, 64, 0, 0.701);
+  filter: invert(50%);
 }
 .button:active {
+  filter: invert(0);
   background-color: #a5a048;
-}
-
-.operator,
-.cal {
-  background-color: #fbec61;
 }
