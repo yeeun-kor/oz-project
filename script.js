@@ -13,19 +13,29 @@ let firstOperand = null; //첫번째, 피연산자 저장할 변수
 let secondOperand = null; //연산자 저장할 변수
 let operator = null; //연산자를 저장할 변수
 
+const $numDivideZero = "정의되지않음";
+
+//계산 성공,실패 상태 플래그 추가
+let isInvalidCalculation = false; //잘못된계산하면 true설정
+let isResulrShown = false; //‼️상태변수추가
+
 //숫자 입력시
 $num.forEach((num) => {
-  num.addEventListener("click", () => {
+  num.addEventListener("click", (e) => {
     //직전에 "="로 계산이 완료된 상태라면 ? : 새계산 시작
-    if ($result.textContent.trim().endsWith("=")) {
+    if (isResulrShown || isInvalidCalculation) {
+      // //이전 상태 초기화
       $result.textContent = "";
       $display.textContent = num.textContent;
-      //이전 상태 초기화
       firstOperand = null;
       secondOperand = null;
       operator = null;
+      isResulrShown = false;
+      isInvalidCalculation = false;
+      console.log(`first : ${firstOperand}, second : ${secondOperand}`);
       return;
     }
+
     if ($display.textContent === "0") {
       $display.textContent = num.textContent;
     } else {
@@ -66,7 +76,7 @@ const calculate = (num1, op, num2) => {
     case "✕":
       return a * b;
     case "÷":
-      return b === 0 ? "Error" : a / b; //num2 는 0이 되면 안된다!
+      return b === 0 ? "Undefined" : a / b; //num2 는 0이 되면 안된다!
     default:
       return "Error";
   }
@@ -74,28 +84,36 @@ const calculate = (num1, op, num2) => {
 
 // = 버튼 클릭하여 계산 하기
 $cal.addEventListener("click", () => {
-  if (firstOperand === null || !operator) return;
   secondOperand = $display.textContent; // 두번째 피연산자 확보
+  //유효성검사
+  console.log(`secondOperand : ${secondOperand}`);
+  if (firstOperand === null || !operator || secondOperand === "") {
+    isInvalidCalculation = true;
+    console.log(`first : ${firstOperand}, second : ${secondOperand}`);
+    return;
+  }
+
   const cal_result = calculate(firstOperand, operator, secondOperand);
-  //화면 표시
   $result.textContent = `${firstOperand} ${operator} ${secondOperand} = `;
 
   //계산 오류시
-  if (cal_result === "Error") {
-    //0/0이나 8/0인 경우
-    $display.textContent = "Error";
+  if (cal_result === "Error" || cal_result === "Undefined") {
+    $display.textContent = $numDivideZero;
+    isInvalidCalculation = true;
     firstOperand = null;
     secondOperand = null;
     operator = null;
     return;
-  } else {
-    //정수 계산 로직
-    const result = Math.round((cal_result + Number.EPSILON) * 1000) / 1000;
-    $display.textContent = result;
-    firstOperand = result;
-    secondOperand = null;
-    operator = null;
   }
+
+  //정수 계산 로직
+  const result = Math.round((cal_result + Number.EPSILON) * 1000) / 1000; //소수점은 3자리까지만
+  $display.textContent = result;
+  firstOperand = result;
+  secondOperand = null;
+  operator = null;
+  isInvalidCalculation = false; //다시 정상으로 돌리기
+  isResulrShown = true; // 계산이 완료됨을 기록
 });
 
 // 소수점 버튼 클릭 -> 소수점 추가
