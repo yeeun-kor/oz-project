@@ -40,3 +40,26 @@
 .read-the-docs {
   color: #888;
 }
+.todo-list {
+  display: flex;
+  flex-direction: column;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+  border-bottom: 1px solid;
+}
+.todo-input {
+  border-radius: 7px;
+  height: 30px;
+}
+.todo-item button {
+  background-color: rgb(191, 191, 223);
+}
+
+.todo-item [type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
