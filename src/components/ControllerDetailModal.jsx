@@ -1,12 +1,11 @@
-import React from 'react';
-
-//1. useBoardStore를 선언하여 zustand 스토어를 불러옵니다.
-//2. addBoard 함수를 불러와 보드를 업데이트 합니다.
+import { useBoardStore } from '../store';
 
 const ControllerDetailModal = ({ onClose }) => {
+  //1. useBoardStore를 선언하여 zustand 스토어를 불러옵니다.
+  const { addBoard } = useBoardStore();
+  //2. addBoard 함수를 불러와 보드를 업데이트 합니다.
   const handleForm = (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const newTask = {
       id: Date.now(),
@@ -15,6 +14,8 @@ const ControllerDetailModal = ({ onClose }) => {
       desc: formData.get('desc'),
       created_at: new Date().toISOString().split('T')[0],
     };
+    addBoard(newTask);
+    console.log(useBoardStore.getState().data);
     onClose();
   };
   return (
