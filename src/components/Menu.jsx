@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Item from "./Item";
 import OrderModal from "./OrderModal";
 
-function Menu({ menu, cart, setCart }) {
+function Menu() {
+  //menu상태 리덕스에서 꺼내쓰기
+  const menu = useSelector((state) => state.menuReducer);
+  console.log(menu);
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
   if (!menu)
@@ -36,12 +40,7 @@ function Menu({ menu, cart, setCart }) {
         );
       })}
       {modalOn ? (
-        <OrderModal
-          modalMenu={modalMenu}
-          setModalOn={setModalOn}
-          cart={cart}
-          setCart={setCart}
-        />
+        <OrderModal modalMenu={modalMenu} setModalOn={setModalOn} />
       ) : null}
     </>
   );
