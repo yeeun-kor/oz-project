@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { dataState } from '../recoil/atom';
 import BoardDetailModal from './BoardDetailModal';
 
 const typeToKorean = (type) => {
@@ -14,15 +16,9 @@ const typeToKorean = (type) => {
   }
 };
 
-//기존 Boards 컴포넌트에서 Data를 MockData를 Props를 받고 이용하는 형태로 구성되어 있습니다.
-//이를 Recoil을 이용하여 상태관리를 하도록 변경합니다.
-//data props 항목을 삭제합니다.
-//데이터를 type에 따라 필터링하여 각 칸반보드에서 사용해야 합니다. type은 prop로 전달되고 있습니다.
-//filteredData에 할당된 data를 필터링 하세요.
-//이후 Recoil의 useRecoilValue를 이용하여 Recoil의 상태를 가져오도록 수정합니다.
-
-const Boards = ({ type, data }) => {
-  const filteredData = data;
+const Boards = ({ type }) => {
+  const data = useRecoilValue(dataState); //atom불러오기
+  const filteredData = data.filter((itm) => itm.type === type);
   const [item, setItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
