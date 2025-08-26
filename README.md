@@ -150,7 +150,9 @@ const rootReducer = combineReducers({
 
 ```
 
-<br />
+> 이때, `combineReducers`는 객체를 인자로 받와야한다!
+> 안그러면 undefined 나옴
+> <br />
 
 ## 3. Store
 
