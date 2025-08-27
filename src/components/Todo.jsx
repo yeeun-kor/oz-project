@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import TodoFilter from './TodoFilter';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-import TodoFilter from './TodoFilter';
 import TodoStats from './TodoStats';
 
 const Todo = () => {
@@ -10,34 +10,46 @@ const Todo = () => {
 
     const generateId = () => Math.floor(Math.random() * 10000);
 
-    const handleAdd = (text) => {
-        const newTodo = {
-            id: generateId(),
-            text,
-            completed: false,
-            createdAt: new Date(),
-        };
+    //함수 최적화
+    const handleAdd = useCallback((text) => {
+        setTodos((prev) => [
+            ...prev,
+            {
+                id: generateId(),
+                text,
+                completed: false,
+                createdAt: new Date(),
+            },
+        ]);
+    }, []);
 
-        setTodos([...todos, newTodo]);
-    };
+    const handleToggle = useCallback(
+        (id) => {
+            setTodos(todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)));
+        },
+        [todos],
+    );
 
-    const handleToggle = (id) => {
-        setTodos(todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)));
-    };
+    const handleDelete = useCallback(
+        (id) => {
+            setTodos(todos.filter((todo) => todo.id !== id));
+        },
+        [todos],
+    );
 
-    const handleDelete = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
-    };
+    const handleEdit = useCallback(
+        (id, newText) => {
+            setTodos(todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)));
+        },
+        [todos],
+    );
 
-    const handleEdit = (id, newText) => {
-        setTodos(todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)));
-    };
-
-    const handleFilterChange = (newFilter) => {
+    const handleFilterChange = useCallback((newFilter) => {
         setFilter(newFilter);
-    };
+    }, []);
 
-    const getFilteredTodos = () => {
+    //useMemo 계산된 변수값을 최적화 시키기
+    const filteredTodos = useMemo(() => {
         switch (filter) {
             case 'active':
                 return todos.filter((todo) => !todo.completed);
@@ -46,9 +58,7 @@ const Todo = () => {
             default:
                 return todos;
         }
-    };
-
-    const filteredTodos = getFilteredTodos();
+    }, [todos, filter]);
 
     return (
         <div className="max-w-xl mx-auto p-5">

@@ -1,4 +1,6 @@
-const TodoStats = ({ todos }) => {
+import { memo, useMemo } from 'react';
+
+const TodoStats = memo(({ todos }) => {
     const calculateStats = () => {
         const total = todos.length;
         const completed = todos.filter((todo) => todo.completed).length;
@@ -7,7 +9,9 @@ const TodoStats = ({ todos }) => {
         return { total, completed, active, percentCompleted };
     };
 
-    const stats = calculateStats();
+    const stats = useMemo(() => {
+        return calculateStats();
+    }, [calculateStats]);
 
     return (
         <div className="my-5 p-4 bg-gray-100 rounded">
@@ -21,6 +25,6 @@ const TodoStats = ({ todos }) => {
             </div>
         </div>
     );
-};
+});
 
 export default TodoStats;

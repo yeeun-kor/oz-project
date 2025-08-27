@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
-const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
+const TodoItem = memo(({ todo, onToggle, onDelete, onEdit }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(todo.text);
 
@@ -46,6 +46,6 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
             )}
         </div>
     );
-};
+});
 
 export default TodoItem;

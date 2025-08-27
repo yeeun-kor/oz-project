@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const TodoForm = ({ onAdd }) => {
     const [text, setText] = useState('');
+    const inputRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +21,7 @@ const TodoForm = ({ onAdd }) => {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="새로운 할 일을 입력하세요"
                 className="flex-1 p-2.5 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                ref={inputRef}
             />
             <button
                 type="submit"
