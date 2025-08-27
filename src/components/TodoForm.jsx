@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 
-const TodoForm = ({ onAdd }) => {
+const TodoForm = memo(({ onAdd }) => {
     const [text, setText] = useState('');
     const inputRef = useRef(null);
 
@@ -31,6 +31,6 @@ const TodoForm = ({ onAdd }) => {
             </button>
         </form>
     );
-};
+});
 
 export default TodoForm;

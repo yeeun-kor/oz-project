@@ -10,18 +10,22 @@ const Todo = () => {
 
     const generateId = () => Math.floor(Math.random() * 10000);
 
-    //함수 최적화
-    const handleAdd = useCallback((text) => {
-        setTodos((prev) => [
-            ...prev,
-            {
+    //setTodos 호출하여 todos상태를 업데이트
+    // 의존성 배열도 todos로 받아와야함.
+    const handleAdd = useCallback(
+        (text) => {
+            const newTodo = {
                 id: generateId(),
                 text,
                 completed: false,
                 createdAt: new Date(),
-            },
-        ]);
-    }, []);
+            };
+
+            setTodos([...todos, newTodo]);
+            console.log('add');
+        },
+        [todos],
+    );
 
     const handleToggle = useCallback(
         (id) => {
@@ -32,6 +36,7 @@ const Todo = () => {
 
     const handleDelete = useCallback(
         (id) => {
+            console.log('handleDelete');
             setTodos(todos.filter((todo) => todo.id !== id));
         },
         [todos],
@@ -45,10 +50,10 @@ const Todo = () => {
     );
 
     const handleFilterChange = useCallback((newFilter) => {
+        console.log('filter');
         setFilter(newFilter);
     }, []);
 
-    //useMemo 계산된 변수값을 최적화 시키기
     const filteredTodos = useMemo(() => {
         switch (filter) {
             case 'active':
