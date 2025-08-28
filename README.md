@@ -1,85 +1,38 @@
-# GitHub 과제 사용 방법
+# 리액트 컴포넌트의 동적 로딩 최적화 적용하기
 
-> ## 목차
->
-> [1. Fork](#fork)
->
-> [2. Clone](#clone)
->
-> [3. 과제 수행](#과제-수행)
->
-> [4. Push](#push)
->
-> [5. LMS 제출](#lms-제출)
->
-> [6. 정답 코드 보는 법](#정답-코드-보기)
+리액트는 기본적으로 클라이언트 사이드 랜더링 방식
+그래서 서버에서 빈 페이지를 먼저 클라이언트로 보내줌
+클라이언트가 빈 화면을 받아서, 여기서 js 코드로 화면 랜더링함!
 
-## Fork
+### 동적로딩 최적화란?
 
-1. fork 버튼을 눌러 자신의 Repository로 복사합니다.
+클라이언트가 서버에서 받은 빈페이지에 JS 랜더링 할 때,
+JS 용량이 엄청나게 크다면? 그만큼 로딩 시간이 길어져서 사용자는 ' 빈화면' 을 볼 수 있음 !
+그래서 이런 동적 로딩을 최적화 하기 위한 리액트의 방법은 두가지가 있다 !
+바로 **lazy** , **Suspense**
 
-- `fork` 버튼을 클릭하여 `fork` 생성합니다.
-  ![fork 버튼](./README_SOURCES/images/how-to-fork.png)
-- 생성된 `fork`에서 `Owner`가 자신이 선택되어있는지를 확인합니다.
-- (`Repository name`과 `Description`은 자유롭게 작성해주셔도 괜찮습니다.)
-- create 버튼을 눌러 `fork`합니다.
-  ![fork 상세](./README_SOURCES/images/fork-detail.png)
-- `fork`된 자신의 Repository를 확인합니다.
-  ![fork 확인](./README_SOURCES/images/fork-confirm.png)
+## 1. lazy
 
-## Clone
+> 컴포넌트를 바로 불러오지 않고, 실제로 그 컴포넌트가 필요할 때 불러옴
 
-2. 자신의 GitHub Repository에서 clone하여 로컬 환경으로 복사
+불러오는 방법은 `import` 할 때, `lazy()` 함수 사용하기
 
-- `clone`을 하기 위해 `<> Code` 버튼을 누릅니다.
-  ![clone 버튼](./README_SOURCES/images/how-to-clone.png)
-- 드랍다운 내용에서 `Local`의 `복사` 버튼을 눌러 GitHub Repository 주소를 복사합니다.
-  ![clone 버튼](./README_SOURCES/images/clone-detail.png)
-
-- 터미널에서 아래 코드에서 `[복사한 GitHub Repository 주소]` 내용을 위에서 복사한 내용으로 바꾸어 실행합니다.
-
-```bash
-git clone [복사한 GitHub Repository 주소]
+```jsx
+const Main = lazy(() => import("./Main.jsx"));
 ```
 
-## 과제 수행
+---
 
-3. 로컬 환경에서 과제 수행
+## 2. Suspense
 
-- 과제 정보와 과제 요구사항에 맞춰 과제를 진행합니다.
+> lazy방식으로 컴포넌트를 불러오는 동안 , 사용자에게 보여줄 임시 화면 설정
 
-## Push
-
-4. 자신의 GitHub Repository에 push
-
-- add, commit, push를 활용하여 자신의 GitHub Repository에 수행한 과제를 저장합니다.
-- `add`
-
-```bash
-git add [파일 경로 (전체일 경우: .)]
+```jsx
+<Suspense fallback={"작성된 임시 화면 "}>
+  {" "}
+  <Main />{" "}
+</Suspense>
 ```
 
-- `commit`
-
-```bash
-git commit -m "[commit 메세지]"
-```
-
-- `push`
-
-```bash
-git push [remote name] [branch name]
-```
-
-## LMS 제출
-
-5. LMS에 GitHub Repository 링크를 복사하여 제출
-
-- GitHub Repository의 주소를 복사하여 LMS에 제출합니다.
-
-## 정답 코드 보기
-
-- 정답 코드는 answer 브랜치에 저장되어있습니다. 브랜치는 터미널에서 다음 명령어를 통해 이동할 수 있습니다.
-  ```bash
-  git checkout answer
-  ```
+불러오는 방법은 `Suspense 컴포넌트를` 리액트에서 꺼내오기
+이때 `lazy` 로 불러온 `main` 컴포넌트를 자식 컴포넌트로 설정해주자.
