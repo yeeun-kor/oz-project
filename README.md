@@ -72,6 +72,24 @@ lazy & Suspense 로 컴포넌트 단위로 코드 스플리티을 진행 = 필�
 근데 , 이런 컴포넌트 이외의 것들도 코드 스플리팅 적용이 될까?
 세팅 방법에 대해 알아보자
 
+```jsx
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Option 2: Function form for more dynamic control (e.g., all node_modules)
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return "vendor"; // Bundle all node_modules into a 'vendor' chunk
+          }
+        },
+      },
+    },
+  },
+});
+```
+
 > ## 질문
 >
 > 동적 로딩 최적화에서 lazy로 필요한 컴포넌트만 불러오고 , suspense로 임시 화면을 보여주었는데 ,,,, 이 작업을 언제 많이 사용하는지?? 용량이 큰 이미지 파일을 불러오기 할 때에도 이 메서드들을 사요하나요?
