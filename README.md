@@ -7,9 +7,9 @@
 
 ---
 
-## 🎯 구현방법 1 : 포켓몬 이름, 이미지, 설명 API로 불러오기
+## 1. 포켓몬 기본 정보 가져오기 (이름, 이미지, 설명)
 
-### 포켓몬 객체 네이밍
+### 1-1. 포켓몬 객체 구조 정의
 
 ```
 id : 포켓 아이디
@@ -31,7 +31,7 @@ useEffect(() => {
 }, []);
 ```
 
-#### API 연동 확인
+### 1-2. API 연동 확인
 
 ![alt text](image.png)
 
@@ -40,7 +40,7 @@ useEffect(() => {
 - 이제 , 이 과정을 통해 포켓몬의 이름 + 사진 + 설명을 연결 시켜서 데이터를 받아와야 한다.
 - 그러기 위해선, 앤드포인트와 객체의 속성명을 어떤걸로 접근하는지 파악이 필요하다.
 
-### API : 포켓몬 이름
+### 1-3. 포켓몬 이름 불러오기
 
 ```jsx
 "https://pokeapi.co/api/v2/pokemon-species/4/";
@@ -57,7 +57,7 @@ useEffect(() => {
 
 ![alt text](image-2.png)
 
-#### API : 포켓몬 이름 - find 배열로 language
+### 1-4. 포켓몬 이름 언어별 필터링
 
 ```jsx
 fetch("https://pokeapi.co/api/v2/pokemon-species/4/")
@@ -70,7 +70,7 @@ fetch("https://pokeapi.co/api/v2/pokemon-species/4/")
 - 이걸 활용해서, "포켓몬 이름"이 나오는 객체를 만들자 !
 - 이거와 마찬가지로, 포켓몬의 설명 + 포켓몬 이미지 파일 긁어오면 된다!
 
-#### API : 포켓몬 이미지 - 앤드포인트에서 id값만 변경하기
+### 1-5. 포켓몬 이미지 불러오기
 
 ```jsx
 파이리 앞면 사진 : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
@@ -80,9 +80,9 @@ fetch("https://pokeapi.co/api/v2/pokemon-species/4/")
 
 ---
 
-## 🎯 구현방법 2 : 포켓몬 1-151번 불러오기
+## 2. 전체 포켓몬 도감 구성 (1~151)
 
-### 최종 목표 : 포켓몬 정보 담기
+### 2-1. 도감 배열 목표
 
 위에서 만든 배열에 이제 각 포켓몬의 정보를 id 값에 맞게끔 정보를 담아주면 된다.
 예시는 아래와 같다! 우리는 아래처럼 만들어주는 작업을 해야한다!
@@ -122,7 +122,7 @@ fetch("https://pokeapi.co/api/v2/pokemon-species/4/")
 
 ---
 
-### 포켓몬 정보 담기 : Array.from 으로 151 공간 만들어주기
+### 2-2. Array.from으로 도감 틀 생성
 
 ```jsx
 Array.from({ length: 151 }, (_, idx) => {});
@@ -136,7 +136,7 @@ Array.from({ length: 151 }, (_, idx) => {
 2. 콜백함수 (151개가 뭐로 구성이 되어있는데 ? 배열의 어떤 내용물 넣을 건지 설정함 )
    - 여기에서 숫자로 1.2.3....151 을 넣을 것이다.
 
-### 포켓몬 정보 : arrayNum 넣는 작업 📍 map()
+### 2-3. 포켓몬 데이터 요청 (map 사용)
 
 ```jsx
 const pokemonDatas = arrayNum.map((id) => getPokemonData(id));
@@ -150,7 +150,7 @@ console.log(pokemonDatas);
 
 ---
 
-### 포켓몬 정보 : Promise.all로 후 처리 📍
+### 2-4. Promise.all로 데이터 수집
 
 ```jsx
 Promise.all(pokemonDatas).then((pokemons) => {
@@ -160,3 +160,9 @@ Promise.all(pokemonDatas).then((pokemons) => {
 
 1. Promise.all 에서 배열을 받게 된다면, 모든 Promise 가 `fullfielld` 될 때 까지 기다립니다.
 2. 각 `Promise` 의 최종 결과값 (json으로 변환된 객체들)로 변환해준다.
+
+---
+
+## 3. 비동기 처리 RTK - asyncThunk
+### 3-1. createAsyncThunk 로 비동기 처리 
+### 3-2. pokemonSlice만들기
