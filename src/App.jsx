@@ -1,45 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import { fetchAllDataOfPokemonById } from "./RTK/thunk";
 
 function App() {
-  //포켓몬데이터
-  const [pokemonDatas, setPokemonDatas] = useState([]);
+  const dispatch = useDispatch();
+  //상태값 꺼내오기
+  //useSelector 의 상태는 store에서 생성한 reducer의 이름  pokemon 상태 꺼내오기
+  const pokemonData = useSelector((state) => state.pokemon.data);
+  console.log(pokemonData);
+  //빈배열 why?
 
-  //151배열 생성
-  const arrayNum = Array.from({ length: 151 }, (_, idx) => {
-    return idx + 1;
-  });
-
-  //api비동기 처리
+  //RTK - thunk 함수명 불러와서 배열 ? 생성
   useEffect(() => {
-    //포켓몬 1마리 정보 얻어오기 --> Promise 반환합니다.
-    const getPokemonData = (pokemonId) => {
-      return fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`)
-        .then((res) => res.json())
-        .then((data) => ({
-          id: pokemonId,
-          name: data.names.find((el) => el.language.name === "ko").name,
-          description: data.flavor_text_entries.find(
-            (el) => el.language.name === "ko",
-          ).flavor_text,
-          front: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
-          back: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonId}.png`,
-        }));
-    };
-    //arrayNum 넣는 작업 📍왜 map() 이지?
-    const pokemonDatas = arrayNum.map((id) => getPokemonData(id));
-    console.log(pokemonDatas);
-
-    //Promise.all로 후 처리해서 json으로 변환
-    Promise.all(pokemonDatas).then((pokemons) => {
-      setPokemonDatas(pokemons);
-    });
+    dispatch(fetchAllDataOfPokemonById(5));
   }, []);
 
   return (
     <div className="flex-col gap-3 flex justify-center items-center text-center">
       <h1>포켓몬 프로젝트</h1>
-      {pokemonDatas.map((pokemon) => (
+      {pokemonData.map((pokemon) => (
         <ul key={pokemon.id}>
           <li>name : {pokemon.name}</li>
           <li>des : {pokemon.description}</li>
