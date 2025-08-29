@@ -1,35 +1,37 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { fetchAllDataOfPokemonById } from "./RTK/thunk";
+import Detail from "./pages/Detail";
+import Favorites from "./pages/Favorites";
+import Main from "./pages/Main";
+import Search from "./pages/Search";
 
 function App() {
   const dispatch = useDispatch();
-  //상태값 꺼내오기
-  //useSelector 의 상태는 store에서 생성한 reducer의 이름  pokemon 상태 꺼내오기
-  const pokemonData = useSelector((state) => state.pokemon.data);
-  console.log(pokemonData);
-  //빈배열 why?
-
-  //RTK - thunk 함수명 불러와서 배열 ? 생성
   useEffect(() => {
     dispatch(fetchAllDataOfPokemonById(5));
   }, []);
 
   return (
-    <div className="flex-col gap-3 flex justify-center items-center text-center">
-      <h1>포켓몬 프로젝트</h1>
-      {pokemonData.map((pokemon) => (
-        <ul key={pokemon.id}>
-          <li>name : {pokemon.name}</li>
-          <li>des : {pokemon.description}</li>
-          <div className="flex justify-center">
-            <img src={pokemon.front}></img>
-            <img src={pokemon.back}></img>
-          </div>
-        </ul>
-      ))}
-    </div>
+    <>
+      <h1 className="text-[40px] text-center">포켓몬 도감</h1>
+      <nav className=" flex gap-3 justify-center">
+        <Link to={"/"}>메인페이지</Link>
+        <Link to={"/detail"}>상세정보</Link>
+        <Link to={"/search"}>검색</Link>
+        <Link to={"/favorite"}>찜목록</Link>
+      </nav>
+      <main className="flex gap-3 flex-wrap justify-center pt-5">
+        <Routes>
+          <Route path={"/"} element={<Main></Main>}></Route>
+          <Route path={"/detail/:pokemonId"} element={<Detail></Detail>}></Route>
+          <Route path={"/search"} element={<Search></Search>}></Route>
+          <Route path={"/favorite"} element={<Favorites></Favorites>}></Route>
+        </Routes>
+      </main>
+    </>
   );
 }
 

@@ -7,7 +7,9 @@ export const pokemonSlice = createSlice({
   initialState: { data: [], loading: true },
 
   //동기적 상태변경
-  reducers: {},
+  reducers: {
+    toggleImage : (state)=>{state.data}
+  },
 
   //비동기적 상태변경
   extraReducers: (builder) => {
