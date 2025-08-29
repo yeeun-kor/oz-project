@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <h1>프로젝트</h1>
-      <p className="bg-indigo-200">hello , pokemon</p>
+      <p className="bg-red-200">hello , pokemon</p>
     </>
   );
 }
