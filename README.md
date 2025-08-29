@@ -28,7 +28,7 @@
 1. tailwindcss 설치
 
 ```powershell
-npm install tailwindcss postcss autoprefixer
+npm install tailwindcss@3 postcss autoprefixer
 ```
 
 2. config 파일 생성
