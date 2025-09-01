@@ -4,11 +4,14 @@ import { fetchAllDataOfPokemonById } from "./thunk";
 export const pokemonSlice = createSlice({
   name: "pokemon",
   //비동기 작업이라 로딩과 에러 필요함.
-  initialState: { data: [], loading: true },
+  initialState: { data: [], loading: true, defaultImgType: "front" },
 
   //동기적 상태변경
   reducers: {
-    toggleImage : (state)=>{state.data}
+    toggleImage: (state) => {
+      state.defaultImgType =
+        state.defaultImgType === "front" ? "back" : "front";
+    },
   },
 
   //비동기적 상태변경
