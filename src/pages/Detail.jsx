@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { pokemonSlice } from "../RTK/pokemonSlice";
 import { selectPokemonById } from "../RTK/selector";
+import FavoriteButton from "../component/FavoriteButton";
 
 export default function Detail() {
   //주소창에서 넘어온 id값 받아오기
@@ -18,7 +19,10 @@ export default function Detail() {
   //reducer호출시 actions 꼭 불러올 것
   return (
     <div className="flex flex-col gap-3 justify-center items-center border-gray-500 border  p-8 rounded-xl">
-      <div className="text-2xl">{data.name}</div>
+      <div className="text-2xl">
+        {data.name}
+        <FavoriteButton pokemonId={data.id}></FavoriteButton>
+      </div>
       <div className="whitespace-pre-wrap text-center">{data.description}</div>
       <img
         src={img}

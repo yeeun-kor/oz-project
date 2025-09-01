@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import FavoriteButton from "./FavoriteButton";
 
 export default function Card({ pokemonData }) {
   //클릭했을 때, 상세페이지 /detail/:pokemonId 로 이동 시키겠다.
@@ -10,6 +11,7 @@ export default function Card({ pokemonData }) {
     >
       <img src={pokemonData.front} alt="" className="w-32" />
       <div>{pokemonData.name}</div>
+      <FavoriteButton pokemonId={pokemonData.id}></FavoriteButton>
     </section>
   );
 }

@@ -93,3 +93,9 @@ export const selectPokemonByRegExp = (reg) =>
 1. `createSelector` 로 상태 꺼내오는 함수를 만들 것
 2. `(state) => state.pokemon.data,` 는 슬라이스에 세팅되어 있는,pokemon 데이터의 배열을 의미함
 3. 여기서 `data의` 들어있는 배열을 통째로 `pokemon` 이라고 설정함.
+
+---
+
+## 2. 찜목록
+
+### 2-1. 좋아하는 포켓몬 보관하는 상태저장소 Slice 만들기
