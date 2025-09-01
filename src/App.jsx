@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { fetchAllDataOfPokemonById } from "./RTK/thunk";
-import Detail from "./pages/Detail";
-import Favorites from "./pages/Favorites";
-import Main from "./pages/Main";
-import Search from "./pages/Search";
+
+const Main = lazy(() => import("./pages/Main"));
+const Detail = lazy(() => import("./pages/Detail"));
+const Favorites = lazy(() => import("./pages/Favorites"));
+const Search = lazy(() => import("./pages/Search"));
 
 function App() {
   const dispatch = useDispatch();
@@ -20,8 +21,13 @@ function App() {
 
   return (
     <>
-      <h1 className="text-[40px] text-center">포켓몬 도감</h1>
-      <nav className=" flex gap-3 justify-center">
+      <h1
+        className="text-[40px] text-center border-t-[50px]
+      border-t-red-500 bg-black text-white"
+      >
+        포켓몬 도감
+      </h1>
+      <nav className=" flex gap-3 justify-center py-3 border-b-[3px] border-b-black ">
         <Link to={"/"}>메인페이지</Link>
         <Link to={"/favorite"}>찜목록</Link>
         <div className="flex items-center">
@@ -35,16 +41,19 @@ function App() {
           <FaMagnifyingGlass />
         </div>
       </nav>
-      <main className="flex gap-3 flex-wrap justify-center pt-5">
-        <Routes>
-          <Route path={"/"} element={<Main></Main>}></Route>
-          <Route
-            path={"/detail/:pokemonId"}
-            element={<Detail></Detail>}
-          ></Route>
-          <Route path={"/search"} element={<Search></Search>}></Route>
-          <Route path={"/favorite"} element={<Favorites></Favorites>}></Route>
-        </Routes>
+      <main className="flex gap-3 flex-wrap justify-center pt-5 bg-[grey] pb-6 ">
+        {/* lazy로 컴포넌트 감싸고, suspense로 동적 반응 대처하기 */}
+        <Suspense fallback={<div>로딩중...</div>}>
+          <Routes>
+            <Route path={"/"} element={<Main></Main>}></Route>
+            <Route
+              path={"/detail/:pokemonId"}
+              element={<Detail></Detail>}
+            ></Route>
+            <Route path={"/search"} element={<Search></Search>}></Route>
+            <Route path={"/favorite"} element={<Favorites></Favorites>}></Route>
+          </Routes>
+        </Suspense>
       </main>
     </>
   );

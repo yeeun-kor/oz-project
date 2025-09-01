@@ -2,7 +2,7 @@ import { getRegExp } from "korean-regexp";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { selectPokemonByRegExp } from "../RTK/selector";
-import Card from "../component/Card";
+import { Card } from "../component/Card";
 
 export default function Search() {
   //검색어 전체
