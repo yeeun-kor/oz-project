@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectPokemonByFavorite } from "../RTK/selector";
-import Card from "../component/Card";
+import { Card } from "../component/Card";
 
 export default function Favorites() {
   //내가 선택한 찜목록의 포켓몬들은 이미 slicer에 저장되어 있음
