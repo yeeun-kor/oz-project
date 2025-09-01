@@ -18,16 +18,19 @@ export default function Detail() {
   //이미지 클릭시 앞,뒤 토글이 되도록 상태 관리
   //reducer호출시 actions 꼭 불러올 것
   return (
-    <div className="flex flex-col gap-3 justify-center items-center border-gray-500 border  p-8 rounded-xl">
-      <div className="text-2xl">
+    <div className="flex flex-col gap-3 justify-center items-center py-8 px-16 rounded-xl bg-white ">
+      <div className="text-2xl ">
         {data.name}
         <FavoriteButton pokemonId={data.id}></FavoriteButton>
       </div>
       <div className="whitespace-pre-wrap text-center">{data.description}</div>
+
       <img
         src={img}
         alt=""
-        className="w-48"
+        className={`w-48 transition-transform duration-500 img-flip ${
+          imgType === "back" ? "rotate-y-180" : ""
+        }`}
         onClick={() => {
           dispatch(pokemonSlice.actions.toggleImage());
         }}

@@ -6,12 +6,17 @@ export default function Card({ pokemonData }) {
   const navigate = useNavigate();
   return (
     <section
-      className="w-40 border items-center flex flex-col rounded-md gap-3 py-3"
+      className="bg-white
+      w-40 border items-center flex flex-col rounded-md gap-5 py-3 transition duration-700 ease-in-out hover:scale-110 hover:duration-700 hover:drop-shadow-lg border-r-4 border-black
+      border-b-4 "
       onClick={() => navigate(`/detail/${pokemonData.id}`)}
     >
       <img src={pokemonData.front} alt="" className="w-32" />
-      <div>{pokemonData.name}</div>
-      <FavoriteButton pokemonId={pokemonData.id}></FavoriteButton>
+      <div className="flex gap-1">
+        {pokemonData.name}
+
+        <FavoriteButton pokemonId={pokemonData.id}></FavoriteButton>
+      </div>
     </section>
   );
 }

@@ -20,8 +20,13 @@ function App() {
 
   return (
     <>
-      <h1 className="text-[40px] text-center">포켓몬 도감</h1>
-      <nav className=" flex gap-3 justify-center">
+      <h1
+        className="text-[40px] text-center border-t-[50px]
+      border-t-red-500 bg-black text-white"
+      >
+        포켓몬 도감
+      </h1>
+      <nav className=" flex gap-3 justify-center py-3 border-b-[3px] border-b-black ">
         <Link to={"/"}>메인페이지</Link>
         <Link to={"/favorite"}>찜목록</Link>
         <div className="flex items-center">
@@ -35,7 +40,7 @@ function App() {
           <FaMagnifyingGlass />
         </div>
       </nav>
-      <main className="flex gap-3 flex-wrap justify-center pt-5">
+      <main className="flex gap-3 flex-wrap justify-center pt-5 bg-[grey] pb-6 ">
         <Routes>
           <Route path={"/"} element={<Main></Main>}></Route>
           <Route
