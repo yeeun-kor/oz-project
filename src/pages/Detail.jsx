@@ -1,0 +1,33 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { pokemonSlice } from "../RTK/pokemonSlice";
+import { selectPokemonById } from "../RTK/selector";
+
+export default function Detail() {
+  //주소창에서 넘어온 id값 받아오기
+  const { pokemonId } = useParams();
+  const dispatch = useDispatch();
+  //RTK에서 imgFrong타입 받아오기
+  const imgType = useSelector((state) => state.pokemon.defaultImgType);
+  const data = useSelector(selectPokemonById(Number(pokemonId)));
+  //RTK값이 "front"이면 data.fron값이고, 만약 "front"가 아니면 data.back 으로
+  const img =
+    imgType === "front" ? data.front : "back" ? data.back : data.front;
+
+  //이미지 클릭시 앞,뒤 토글이 되도록 상태 관리
+  //reducer호출시 actions 꼭 불러올 것
+  return (
+    <div className="flex flex-col gap-3 justify-center items-center border-gray-500 border  p-8 rounded-xl">
+      <div className="text-2xl">{data.name}</div>
+      <div className="whitespace-pre-wrap text-center">{data.description}</div>
+      <img
+        src={img}
+        alt=""
+        className="w-48"
+        onClick={() => {
+          dispatch(pokemonSlice.actions.toggleImage());
+        }}
+      />
+    </div>
+  );
+}
