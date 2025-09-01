@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { pokemonSlice } from "../RTK/pokemonSlice";
@@ -17,9 +18,11 @@ export default function Detail() {
 
   //이미지 클릭시 앞,뒤 토글이 되도록 상태 관리
   //reducer호출시 actions 꼭 불러올 것
+
+  const [isSoundPlaying, setIsSoundPlaying] = useState(true);
   return (
     <div className="flex flex-col gap-3 justify-center items-center py-8 px-16 rounded-xl bg-white ">
-      <div className="text-2xl ">
+      <div className="text-2xl flex gap-2 items-start">
         {data.name}
         <FavoriteButton pokemonId={data.id}></FavoriteButton>
       </div>
@@ -35,6 +38,20 @@ export default function Detail() {
           dispatch(pokemonSlice.actions.toggleImage());
         }}
       />
+      <div className="flex flex-col justify-center items-center gap-3">
+        <button
+          className="border p-2 rounded-lg bg-slate-300"
+          onClick={() => setIsSoundPlaying(!isSoundPlaying)}
+        >
+          울음소리
+        </button>
+
+        <audio
+          className={isSoundPlaying ? "invisible" : "visible"}
+          src={data.sound}
+          controls
+        ></audio>
+      </div>
     </div>
   );
 }
