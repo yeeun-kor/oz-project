@@ -34,7 +34,7 @@ export const pokemonSlice = createSlice({
 //찜목록 저장소
 export const favoriteSlice = createSlice({
   name: "favorite",
-  initialState: [1, 2, 3],
+  initialState: [],
   //찜목록 추가하는 리듀서 & 찜에서 삭제하는 리듀서
   reducers: {
     //찜 추가 :원래 상태에 들어오는 값(action.payload)추가

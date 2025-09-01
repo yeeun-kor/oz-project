@@ -18,10 +18,11 @@ export const fetchAllDataOfPokemonById = createAsyncThunk(
           id: pokemonId,
           name: data.names.find((el) => el.language.name === "ko").name,
           description: data.flavor_text_entries.find(
-            (el) => el.language.name === "ko",
+            (el) => el.language.name === "ko"
           ).flavor_text,
           front: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
           back: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonId}.png`,
+          sound: `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonId}.ogg`,
         }));
     };
 
@@ -34,5 +35,5 @@ export const fetchAllDataOfPokemonById = createAsyncThunk(
       .catch((err) => {
         throw err; // RTK에서 rejected 상태로 전달
       });
-  },
+  }
 );
