@@ -5,9 +5,14 @@
 리액트와 최신 프론트엔드 기술 스택을 활용하여 제작한 포켓몬 도감 애플리케이션입니다.
 포켓몬의 이름, 이미지, 설명을 불러오고 검색 및 찜 기능을 제공합니다.
 
+<br/>
+<br/>
+
 ---
 
 ## 1. 검색 페이지
+
+<br/>
 
 ### 1-1. 검색창 구현
 
@@ -27,6 +32,8 @@
 ```bash
   npm install react-icons --save
 ```
+
+<br/>
 
 ### 1-2. 검색어 구현
 
@@ -48,6 +55,8 @@
 
 - `/search?pokemon=` 에 이벤트 값이 들어온다.
 
+<br/>
+
 ### 1-3. 검색어 받아와서 처리하기
 
 > useSearchParams() 검색어에 타이핑 된 값 가져오기
@@ -63,6 +72,8 @@ const [searchParams] = useSearchParams();
 const pokemon = searchParams.get("pokemon"); //배열에서 검색어변수명인 pokemon에서 값 찾아오기.
 ```
 
+<br/>
+
 #### **정규표현식으로 검색어 변환**
 
 - 우리는 정규표현식을 통해서 검색어 매칭 편하게 받는 라이브러리를 설치 할 것이다.
@@ -73,10 +84,14 @@ const pokemon = searchParams.get("pokemon"); //배열에서 검색어변수명�
 npm i korean-regexp
 ```
 
+<br/>
+
 ### 1-4. 검색어와 일치하는 데이터값 불러오는 selector만들기
 
 - 검색어와 일치하는 데이터를 RTK에서 설정한 useSelector에서 꺼내서 로직을 짜야함.
 - 모듈화 시키기 위해서, reg에서 받아온 값과 RTK에 저장된 데이터 찾는 selector를 만들자.
+
+  ![1756697257922](image/README/1756697257922.png)
 
 ```jsx
 export const selectPokemonByRegExp = (reg) =>
@@ -88,8 +103,21 @@ export const selectPokemonByRegExp = (reg) =>
   );
 ```
 
-![1756697257922](image/README/1756697257922.png)
-
 1. `createSelector` 로 상태 꺼내오는 함수를 만들 것
 2. `(state) => state.pokemon.data,` 는 슬라이스에 세팅되어 있는,pokemon 데이터의 배열을 의미함
 3. 여기서 `data의` 들어있는 배열을 통째로 `pokemon` 이라고 설정함.
+
+<br/>
+
+### 1-5. selector로 상태값 꺼내어서 map으로 돌리기
+
+```jsx
+const pokemon = useSelector(selectPokemonByRegExp(reg));
+
+return ({
+  pokemon.map((el) => <Card key={el.id} pokemonData={el}></Card>);
+})
+```
+
+1. `useSelector` 로 검색어와 일치하여 필터링 된 배열값을 가지고 왔다.
+2. 이제 map으로 돌려서 랜더링 해주기.
