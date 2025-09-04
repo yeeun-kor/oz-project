@@ -27,6 +27,4 @@ const Product = memo(({ product, addToCart }) => {
     );
 });
 
-Product.displayName = "Product";
-
 export default Product;
