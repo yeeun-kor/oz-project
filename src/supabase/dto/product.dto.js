@@ -7,6 +7,7 @@ const getAllProducts = async () => {
   brands(name)
 `);
   states.data = states.data || [];
+
   return states;
 };
 

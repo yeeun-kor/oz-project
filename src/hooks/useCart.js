@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { sbCartObject as supabase } from "../supabase/dto/cart.dto";
+import { useModal, makeModalData } from "../contexts/ModalContext";
 
 const useCart = () => {
+  const { openModal, closeModal } = useModal();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,6 +15,14 @@ const useCart = () => {
       setCartItems(data);
     } catch (error) {
       console.error("장바구니 조회 오류:", error);
+      const modalContents = makeModalData({
+        modalId: "Read Cart Error",
+        mode: "alert",
+        title: "오류",
+        contents: "장바구니를 가져오는데 실패했습니다. 다시 시도해주세요.",
+        confirmAction: () => closeModal("Read Cart Error"),
+      });
+      openModal(modalContents);
     }
   };
 
@@ -29,11 +39,27 @@ const useCart = () => {
       } else {
         await supabase.postProductToCart(productId, quantity);
       }
-
+      const modalContents = makeModalData({
+        modalId: "Add Cart",
+        mode: "alert",
+        title: "장바구니 추가",
+        contents: "장바구니에 상품이 추가되었습니다.",
+        confirmAction: () => closeModal("Add Cart"),
+      });
+      openModal(modalContents);
       await refreshCart();
       return { success: true };
     } catch (error) {
       console.error("장바구니 추가 오류:", error);
+      const modalContents = makeModalData({
+        modalId: "Add Cart Error",
+        mode: "alert",
+        title: "오류",
+        contents:
+          "장바구니에 상품을 추가하는데 실패했습니다. 다시 시도해주세요.",
+        confirmAction: () => closeModal("Add Cart Error"),
+      });
+      openModal(modalContents);
       return { success: false, error: error.message };
     }
   };
@@ -56,6 +82,14 @@ const useCart = () => {
       return { success: true };
     } catch (error) {
       console.error("수량 변경 오류:", error);
+      const modalContents = makeModalData({
+        modalId: "Change Quantity Error",
+        mode: "alert",
+        title: "오류",
+        contents: "수량을 변경하는데 실패했습니다. 다시 시도해주세요.",
+        confirmAction: () => closeModal("Change Quantity Error"),
+      });
+      openModal(modalContents);
       return { success: false, error: error.message };
     }
   };
@@ -69,6 +103,14 @@ const useCart = () => {
       return { success: true };
     } catch (error) {
       console.error("상품 제거 오류:", error);
+      const modalContents = makeModalData({
+        modalId: "Remove Item Error",
+        mode: "alert",
+        title: "오류",
+        contents: "상품을 제거하는데 실패했습니다. 다시 시도해주세요.",
+        confirmAction: () => closeModal("Remove Item Error"),
+      });
+      openModal(modalContents);
       return { success: false, error: error.message };
     }
   };
