@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { sbCartObject as supabase } from "../supabase/dto/cart.dto";
-import { useModal } from "../contexts/ModalContext";
 
 const useCart = () => {
-  const { openModal, closeModal } = useModal();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +13,6 @@ const useCart = () => {
       setCartItems(data);
     } catch (error) {
       console.error("장바구니 조회 오류:", error);
-      openModal("장바구니조회 오류", "오류", "장바구니 조회에 실패하였습니다.");
     }
   };
 
