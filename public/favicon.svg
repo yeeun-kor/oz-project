@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Cart Favicon">
+  <title>Cart Favicon</title>
+  <desc>Minimal shopping cart icon for favicon usage. Transparent background, uses currentColor.</desc>
+  <g fill="oklch(72.3% 0.219 149.57)">
+    <!-- Basket -->
+    <path d="M12 20h31.5a2 2 0 0 1 1.94 1.52l4.3 17.2A3.5 3.5 0 0 1 46.34 43H20.2a3.5 3.5 0 0 1-3.41-2.68L12 22.5V20z" />
+    <!-- Handle -->
+    <rect x="41" y="12" width="8" height="4" rx="2" ry="2"/>
+    <rect x="46" y="12" width="4" height="10" rx="2" ry="2"/>
+    <!-- Wheels -->
+    <circle cx="24" cy="50" r="4"/>
+    <circle cx="42" cy="50" r="4"/>
+    <!-- Axle hint -->
+    <rect x="24" y="48" width="18" height="2" rx="1" ry="1"/>
+  </g>
+</svg>
