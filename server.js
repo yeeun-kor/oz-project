@@ -20,8 +20,7 @@ app.use(express.json());
 app.use(express.text());
 
 app.options("/", (req, res) => {
-  res.writeHead(204, headers);
-  res.send();
+  return res.send();
 });
 
 app.get("/", (req, res) => {
