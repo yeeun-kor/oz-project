@@ -50,24 +50,24 @@ app.use(express.json());
 // 1️⃣. 요구사항에 맞도록 session 옵션을 설정해 주세요. (총 4가지)
 app.use(
   session({
-    // 암호화, 열쇠 역할을 하는 문자열 설정
-    // 요청이 들어왔을 때 변경되는 사항이 없는 경우 저장하지 않도록 설정
-    // 요청이 들어왔을 때 내용이 비어있는 경우 저장하지 않도록 설정
-    // 쿠키 이름을 session_id로 변경
+    secret: "session",
+    resave: false,
+    saveUninitialzed: false,
+    name: "session_id",
   })
 );
 
 // POST 요청 (로그인 요청시 보내는 메소드)
 app.post("/", (req, res) => {
-  // 2️⃣. 요청 바디에서 전달받은 값을 구조분해 할당을 사용하여 관리하세요.
-  const {} = req.body;
-  // 3️⃣. (find 메서드를 사용하여) users의 정보와 사용자가 입력한 정보를 비교하여 일치하는 회원이 존재하는지 확인하는 로직을 작성하세요.
-  const userInfo = users.find();
-
+  // console.log(req.body);
+  const { userId, userPassword } = req.body;
+  const userInfo = users.find(
+    (el) => el.user_id === userId && el.user_password === userPassword
+  );
+  // console.log(userInfo);
   if (!userInfo) {
     res.status(401).send("로그인 실패");
   } else {
-    // 유저가 존재하는 경우 user의 id 정보를 세션에 저장
     req.session.userId = userInfo.user_id;
     res.send("⭐️세션 생성 완료!");
   }
@@ -76,14 +76,17 @@ app.post("/", (req, res) => {
 // GET 요청
 app.get("/", (req, res) => {
   const userInfo = users.find((el) => el.user_id === req.session.userId);
-  // json 형식으로 내보내기
+  // console.log(typeof userInfo);타입이 Object로 나오는데,
+  // 이걸 그대로 return 하면 안되려나 ??? 꼭 json형태로 바꿔야하나요 ???
+  // 그리고 추가로 ! app.post에서는 json으로 변환 하지 않고 -> 유저의 정보를 바로 session에 저장해도 되나요 ?
+  //왜 이녀석만 json으로 바꿔야하는지 애-매 하네요
   return res.json(userInfo);
 });
 
 // DELETE 요청
 app.delete("/", (req, res) => {
-  // 4️⃣. 세션 내 정보를 삭제하는 메소드를 작성하세요.
-  // 5️⃣. 쿠키를 삭제하는 메소드를 작성하세요.
+  req.session.destroy();
+  res.clearCookie("session_id");
   res.send("🧹세션 삭제 완료");
 });
 
