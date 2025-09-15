@@ -18,13 +18,9 @@ function login() {
   const userId = idInput.value;
   const userPassword = passwordInput.value;
 
-  return (
-    // 유저 아이디와 비밀번호를 담아 서버에 post 요청
-    //post가 끝나면 토큰키가 발급 받아짐 , 이때 res로 토큰키가 통째로 왕창 들어옴 
-    axios
-      .post("http://localhost:3000", { userId, userPassword })
-      .then((res) => (accessToken = res.data))
-  );
+  return axios
+    .post("http://localhost:3000", { userId, userPassword })
+    .then((res) => (accessToken = res.data));
 }
 
 function logout() {
@@ -33,7 +29,6 @@ function logout() {
 
 function getUserInfo() {
   return axios.get("http://localhost:3000", {
-    // header에 토큰을 넣어서 전송
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 }
@@ -54,7 +49,6 @@ function renderLoginForm() {
 
 loginButton.onclick = () => {
   login() // post 요청
-    // 응답으로 받은 엑세스 토큰 (엑세스 토큰은 자동으로 헤더에 담겨서 요청이 전송됨..)
     .then(() => getUserInfo()) // get 요청
     .then((res) => renderUserInfo(res.data));
 };
