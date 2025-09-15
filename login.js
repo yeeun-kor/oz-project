@@ -20,6 +20,7 @@ function login() {
 
   return (
     // 유저 아이디와 비밀번호를 담아 서버에 post 요청
+    //post가 끝나면 토큰키가 발급 받아짐 , 이때 res로 토큰키가 통째로 왕창 들어옴 
     axios
       .post("http://localhost:3000", { userId, userPassword })
       .then((res) => (accessToken = res.data))
