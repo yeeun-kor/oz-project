@@ -89,8 +89,37 @@ POST film/post/:postId/comment
 
 ## Postman으로 요청 보내보기 (Smoke Test)
 
-## Reference
+## 디렉토리 파일 구조
 
-### CRUD
-
-https://www.prisma.io/docs/orm/prisma-client/queries/crud
+```
+src/
+│
+├─ index.mjs                # 서버 진입점
+│
+├─ feature/
+│   ├─ film/                # 영화 관련
+│   │   ├─ router.mjs       # GET /film, GET /film/:id
+│   │   ├─ controller.mjs   # getAll, getOne
+│   │   └─ model.mjs        # filmFindMany, filmFindOne
+│   │
+│   ├─ post/                # 게시글 관련
+│   │   ├─ router.mjs       # GET /film/post, GET /film/post/:id
+│   │   ├─ controller.mjs
+│   │   └─ model.mjs
+│   │
+│   ├─ like/                # 좋아요 관련
+│   │   ├─ router.mjs       # GET/POST/DELETE /film/post/like
+│   │   ├─ controller.mjs
+│   │   └─ model.mjs
+│   │
+│   └─ comment/             # 댓글 관련
+│       ├─ router.mjs       # GET/POST /film/post/:postId/comment
+│       ├─ controller.mjs
+│       └─ model.mjs
+│
+├─ util/
+│   └─ getPageStartEnd.mjs  # 페이지네이션 계산
+│
+└─ prisma/
+    └─ client.mjs           # Prisma 클라이언트
+```
