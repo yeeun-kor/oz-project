@@ -4,6 +4,9 @@ CREATE SCHEMA IF NOT EXISTS "public";
 -- CreateEnum
 CREATE TYPE "public"."mpaa_rating" AS ENUM ('G', 'PG', 'PG-13', 'R', 'NC-17');
 
+-- CreateEnum
+CREATE TYPE "public"."reaction_type" AS ENUM ('LIKE', 'HEART', 'SMILE', 'ANGRY');
+
 -- CreateTable
 CREATE TABLE "public"."actor" (
     "actor_id" SERIAL NOT NULL,
@@ -62,7 +65,7 @@ CREATE TABLE "public"."customer" (
     "store_id" INTEGER NOT NULL,
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
-    "email" TEXT,
+    "email" TEXT NOT NULL,
     "address_id" INTEGER NOT NULL,
     "activebool" BOOLEAN NOT NULL DEFAULT true,
     "create_date" DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -181,6 +184,63 @@ CREATE TABLE "public"."store" (
     CONSTRAINT "store_pkey" PRIMARY KEY ("store_id")
 );
 
+-- CreateTable
+CREATE TABLE "public"."film_comment" (
+    "comment_id" SERIAL NOT NULL,
+    "post_id" INTEGER,
+    "customer_id" INTEGER,
+    "content" TEXT,
+    "created_at" TIMESTAMP(6),
+    "updated_at" TIMESTAMP(6),
+
+    CONSTRAINT "film_comment_pkey" PRIMARY KEY ("comment_id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."film_post" (
+    "post_id" SERIAL NOT NULL,
+    "film_id" INTEGER,
+    "content" TEXT,
+    "created_at" TIMESTAMP(6),
+    "updated_at" TIMESTAMP(6),
+
+    CONSTRAINT "film_post_pkey" PRIMARY KEY ("post_id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."mention" (
+    "mention_id" SERIAL NOT NULL,
+    "created_at" TIMESTAMP(6),
+    "comment_id" INTEGER,
+    "mentioned_customer_id" INTEGER,
+
+    CONSTRAINT "mention_pkey" PRIMARY KEY ("mention_id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."notification" (
+    "notification_id" SERIAL NOT NULL,
+    "mentioner_id" INTEGER,
+    "mention_id" INTEGER,
+    "content" TEXT,
+    "created_at" TIMESTAMP(6),
+    "is_read" BOOLEAN,
+    "read_at" TIMESTAMP(6),
+
+    CONSTRAINT "notification_pkey" PRIMARY KEY ("notification_id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."post_reaction" (
+    "reaction_id" SERIAL NOT NULL,
+    "reaction_type" "public"."reaction_type",
+    "post_id" INTEGER,
+    "customer_id" INTEGER,
+    "created_at" TIMESTAMP(6),
+
+    CONSTRAINT "post_reaction_pkey" PRIMARY KEY ("reaction_id")
+);
+
 -- CreateIndex
 CREATE INDEX "idx_actor_last_name" ON "public"."actor"("last_name");
 
@@ -225,6 +285,12 @@ CREATE UNIQUE INDEX "idx_unq_rental_rental_date_inventory_id_customer_id" ON "pu
 
 -- CreateIndex
 CREATE UNIQUE INDEX "idx_unq_manager_staff_id" ON "public"."store"("manager_staff_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "notification_mention_id_key" ON "public"."notification"("mention_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "unique_post_customer" ON "public"."post_reaction"("post_id", "customer_id");
 
 -- AddForeignKey
 ALTER TABLE "public"."address" ADD CONSTRAINT "address_city_id_fkey" FOREIGN KEY ("city_id") REFERENCES "public"."city"("city_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -279,4 +345,31 @@ ALTER TABLE "public"."staff" ADD CONSTRAINT "staff_store_id_fkey" FOREIGN KEY ("
 
 -- AddForeignKey
 ALTER TABLE "public"."store" ADD CONSTRAINT "store_address_id_fkey" FOREIGN KEY ("address_id") REFERENCES "public"."address"("address_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."film_comment" ADD CONSTRAINT "film_comment_customer_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "public"."customer"("customer_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."film_comment" ADD CONSTRAINT "film_comment_post_id_fkey" FOREIGN KEY ("post_id") REFERENCES "public"."film_post"("post_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."film_post" ADD CONSTRAINT "film_post_film_id_fkey" FOREIGN KEY ("film_id") REFERENCES "public"."film"("film_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."mention" ADD CONSTRAINT "mention_comment_id_fkey" FOREIGN KEY ("comment_id") REFERENCES "public"."film_comment"("comment_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."mention" ADD CONSTRAINT "mention_mentioned_customer_id_fkey" FOREIGN KEY ("mentioned_customer_id") REFERENCES "public"."customer"("customer_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."notification" ADD CONSTRAINT "notification_mention_id_fkey" FOREIGN KEY ("mention_id") REFERENCES "public"."mention"("mention_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."notification" ADD CONSTRAINT "notification_mentioner_id_fkey" FOREIGN KEY ("mentioner_id") REFERENCES "public"."customer"("customer_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."post_reaction" ADD CONSTRAINT "post_reaction_customer_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "public"."customer"("customer_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "public"."post_reaction" ADD CONSTRAINT "post_reaction_post_id_fkey" FOREIGN KEY ("post_id") REFERENCES "public"."film_post"("post_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 

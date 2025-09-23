@@ -3,7 +3,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
+import {
+  commentCreateRouter,
+  commentGetRouter,
+} from "./feature/comment/router.mjs";
 import { filmRouter } from "./feature/film/router.mjs";
+import { likeRouter } from "./feature/like/router.mjs";
+import { postRouter } from "./feature/post/router.mjs";
 // .env 파일 불러오기
 dotenv.config();
 
@@ -28,6 +34,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Basic Router Set
+app.get("/film/post/:postId/comment", commentGetRouter);
+app.post("/film/post/:postId/comment", commentCreateRouter);
+app.use("/film/post/like", likeRouter);
+app.use("/film/post", postRouter);
 app.use("/film", filmRouter);
 
 // HTTP 요청 로깅

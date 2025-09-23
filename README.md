@@ -15,6 +15,7 @@ npx prisma init
 ```
 
 ## supabase용 세팅
+
 ```prisma
 # schema.prisma
 datasource db {
@@ -51,7 +52,10 @@ npx prisma migrate resolve --applied 0_init
 # 스키마 변경 (ex, NOT NULL, CURRENT TIMESTAMP 적용)
 
 # 마이그레이션 시작
+# 클라이언트 재생성 잊지않기 ㅡ!!!!!!
 npx prisma migrate dev
+npx prisma generate
+
 
 # Note: npx prisma migrate dev는 개발용 데이터베이스에 적용하는 명령어다.
 # 개발용 데이터베이스는 git staging area와 비슷한 개념으로 보면 된다.
@@ -71,7 +75,7 @@ npm i -D eslint@^8 eslint-config-prettier eslint-plugin-prettier prettier
 ## REST API 서버 경로
 
 ```
-GET film
+GET fil
 GET film/:id
 GET film/post
 GET film/post/:id

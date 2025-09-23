@@ -61,19 +61,23 @@ model country {
 }
 
 model customer {
-  customer_id Int       @id @default(autoincrement())
-  store_id    Int
-  first_name  String
-  last_name   String
-  email       String?
-  address_id  Int
-  activebool  Boolean   @default(true)
-  create_date DateTime  @default(dbgenerated("CURRENT_DATE")) @db.Date
-  last_update DateTime? @default(now()) @db.Timestamptz(6)
-  active      Int?
-  address     address   @relation(fields: [address_id], references: [address_id])
-  store       store     @relation(fields: [store_id], references: [store_id])
-  rental      rental[]
+  customer_id   Int             @id @default(autoincrement())
+  store_id      Int
+  first_name    String
+  last_name     String
+  email         String
+  address_id    Int
+  activebool    Boolean         @default(true)
+  create_date   DateTime        @default(dbgenerated("CURRENT_DATE")) @db.Date
+  last_update   DateTime?       @default(now()) @db.Timestamptz(6)
+  active        Int?
+  address       address         @relation(fields: [address_id], references: [address_id])
+  store         store           @relation(fields: [store_id], references: [store_id])
+  film_comment  film_comment[]
+  mention       mention[]
+  notification  notification[]
+  post_reaction post_reaction[]
+  rental        rental[]
 
   @@index([address_id], map: "idx_fk_address_id")
   @@index([store_id], map: "idx_fk_store_id")
@@ -99,6 +103,7 @@ model film {
   language_film_original_language_idTolanguage language?               @relation("film_original_language_idTolanguage", fields: [original_language_id], references: [language_id], onDelete: Restrict)
   film_actor                                   film_actor[]
   film_category                                film_category[]
+  film_post                                    film_post[]
   inventory                                    inventory[]
 
   @@index([fulltext], type: Gist)
@@ -204,10 +209,74 @@ model store {
   address          address     @relation(fields: [address_id], references: [address_id])
 }
 
+model film_comment {
+  comment_id  Int        @id @default(autoincrement())
+  post_id     Int?
+  customer_id Int?
+  content     String?
+  created_at  DateTime?  @db.Timestamp(6)
+  updated_at  DateTime?  @db.Timestamp(6)
+  customer    customer?  @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+  film_post   film_post? @relation(fields: [post_id], references: [post_id], onDelete: NoAction, onUpdate: NoAction)
+  mention     mention[]
+}
+
+model film_post {
+  post_id       Int             @id @default(autoincrement())
+  film_id       Int?
+  content       String?
+  created_at    DateTime?       @db.Timestamp(6)
+  updated_at    DateTime?       @db.Timestamp(6)
+  film_comment  film_comment[]
+  film          film?           @relation(fields: [film_id], references: [film_id], onDelete: NoAction, onUpdate: NoAction)
+  post_reaction post_reaction[]
+}
+
+model mention {
+  mention_id            Int           @id @default(autoincrement())
+  created_at            DateTime?     @db.Timestamp(6)
+  comment_id            Int?
+  mentioned_customer_id Int?
+  film_comment          film_comment? @relation(fields: [comment_id], references: [comment_id], onDelete: NoAction, onUpdate: NoAction)
+  customer              customer?     @relation(fields: [mentioned_customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+  notification          notification?
+}
+
+model notification {
+  notification_id Int       @id @default(autoincrement())
+  mentioner_id    Int?
+  mention_id      Int?      @unique
+  content         String?
+  created_at      DateTime? @db.Timestamp(6)
+  is_read         Boolean?
+  read_at         DateTime? @db.Timestamp(6)
+  mention         mention?  @relation(fields: [mention_id], references: [mention_id], onDelete: NoAction, onUpdate: NoAction)
+  customer        customer? @relation(fields: [mentioner_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model post_reaction {
+  reaction_id   Int            @id @default(autoincrement())
+  reaction_type reaction_type?
+  post_id       Int?
+  customer_id   Int?
+  created_at    DateTime?      @db.Timestamp(6)
+  customer      customer?      @relation(fields: [customer_id], references: [customer_id], onDelete: NoAction, onUpdate: NoAction)
+  film_post     film_post?     @relation(fields: [post_id], references: [post_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([post_id, customer_id], map: "unique_post_customer")
+}
+
 enum mpaa_rating {
   G
   PG
   PG_13 @map("PG-13")
   R
   NC_17 @map("NC-17")
+}
+
+enum reaction_type {
+  LIKE
+  HEART
+  SMILE
+  ANGRY
 }
