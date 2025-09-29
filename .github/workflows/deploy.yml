@@ -5,9 +5,9 @@ on:
       - main
 
 jobs:
-   My-Deploy-Job:
-    runs-on: ubuntu-latest 
+  My-Deploy-Job:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Hello World 출력하기
-      run:echo "Hello World"
+      - name: hello world
+        run: echo "Hello Wolrd!"
