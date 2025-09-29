@@ -11,3 +11,9 @@ jobs:
     steps:
       - name: hello world
         run: echo "Hello Wolrd!"
+
+      - name: 여러 명령어 문자 작성하기
+        run: |
+          echo "Good"
+          echo "Hi"
+          pwd
