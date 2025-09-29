@@ -17,3 +17,7 @@ jobs:
           echo "Good"
           echo "Hi"
           pwd
+      - name: 깃헙에 저장된 변수 사용해보기
+        run: |
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_SHA
