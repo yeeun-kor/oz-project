@@ -1,27 +1,11 @@
-name: Github Actions Prac01
+name: Deploy to S3 and Invalidate CloudFront
 on:
   push:
     branches:
       - main
-
 jobs:
-  My-Deploy-Job:
+  Deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: hello world
-        run: echo "Hello Wolrd!"
-
-      - name: 여러 명령어 문자 작성하기
-        run: |
-          echo "Good"
-          echo "Hi"
-          pwd
-      - name: 깃헙에 저장된 변수 사용해보기
-        run: |
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_SHA
-      - name: 깃헙에 시크릿 변수 사용하기2
-        run: |
-          echo ${{secrets.MY_NAME}}
-          echo ${{secrets.MY_HOBBY}}
+      - name: Github 에 빌드한 파일 불러오기
+        uses: actions/checkout@v4
