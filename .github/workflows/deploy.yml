@@ -1,0 +1,5 @@
+name: Github Actions Prac01
+on:
+  push:
+    branches:
+      - main
