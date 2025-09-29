@@ -18,5 +18,6 @@ jobs:
       - name: build 파일이 제대로 생겼는지 확인
         run: |
           ls
+          echo "----------------"
           cd dist
           ls
