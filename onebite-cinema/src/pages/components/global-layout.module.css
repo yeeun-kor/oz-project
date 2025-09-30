@@ -1,0 +1,18 @@
+.header {
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.header > a {
+  color: red;
+  text-decoration: none;
+}
+.main {
+  padding-top: 10px;
+}
+
+.footer {
+  padding: 100px 0px;
+  color: grey;
+}
