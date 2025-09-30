@@ -1,0 +1,23 @@
+name: Deploy to S3 and Invalidate CloudFront
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github 에 빌드한 파일 불러오기
+        uses: actions/checkout@v4
+      - name: Repository 파일 출력
+        run: ls
+      - name: 의존성 설치
+        run: npm i
+      - name: build하기
+        run: npm run build
+      - name: build 파일이 제대로 생겼는지 확인
+        run: |
+          ls
+          echo "----------------"
+          cd dist
+          ls
