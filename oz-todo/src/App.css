@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Cafe24PROUP";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2507-1@1.0/Cafe24PROUP.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Cafe24PROUP";
+  width: 760px;
+}
+
+.APP {
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
