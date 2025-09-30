@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>보물찾기</title>
+  </head>
+  <body>
+    <script>
+      // 보기: {} object
+      key = {};
+      console.log(`${key} ${typeof key}`);
+      console.log(JSON.stringify(key));
+      let result = JSON.stringify(key);
+      console.log(`결과값은 ${result}`);
+      //   console.log(
+      //     `프롬포트 반환값은 표현식을 써야함 ${prompt("표현식을 써야함")}`
+      //   );
+      //   {} 객체 그대로 접근하고 싶다면 ?
+
+      let obj = {};
+      console.log(`결과값은? ${JSON.stringify(obj)}`);
+      //   결과값
+      console.log(obj + typeof obj);
+    </script>
+  </body>
+</html>
