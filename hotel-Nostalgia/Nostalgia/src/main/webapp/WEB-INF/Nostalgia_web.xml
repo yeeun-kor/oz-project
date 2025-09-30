@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<!-- 서블릿 등록 -->
+	<servlet>
+		<servlet-name>parameter</servlet-name>
+		<servlet-class>com.param.ParamServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>parameter</servlet-name>
+		<url-pattern>/ParamServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 시큐리티 제약 사항 설정하기 -->
+	<security-constraint>
+		<web-resource-collection><!-- 웹 자원에 대한 접근 설정 -->
+			<web-resource-name>Nostalgia</web-resource-name><!-- 웹자원의 이름 설정 -->
+			<url-pattern>/join.jsp</url-pattern><!-- 접근 제한을 요청할 
+				URL 목록 설정 -->
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint><!-- 권한이 부여된 사용자만 접근 할 수 있도록 이름 설정하기 -->
+			<description></description>
+			<role-name>yeeun</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- 시큐리티 인증 설정하기 FORM방식 -->
+	<!-- 로그인 페이지 만들기 -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page> /NOSTALGIA/log_in.jsp</form-login-page>
+			<form-error-page> /NOSTALGIA/error.jsp</form-error-page>
+		</form-login-config>
+		<realm-name>MyRealm</realm-name>
+	</login-config>
+
+<!-- commons-fileupload와 라이브러리 추가  -->
+<servlet>
+    <servlet-name>fileUpload</servlet-name>
+    <servlet-class>org.apache.commons.fileupload.servlet.FileUploadServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+
+<!--  이미지 파일 업로드-->
+<servlet>
+    <servlet-name>images</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+    <init-param>
+        <param-name>debug</param-name>
+        <param-value>0</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>images</servlet-name>
+    <url-pattern>/images/*</url-pattern>
+</servlet-mapping>
+
+
+
+</web-app>
